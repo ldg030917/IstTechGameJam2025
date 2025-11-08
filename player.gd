@@ -10,6 +10,9 @@ var hp:float
 var speed:float
 var atk:float
 var inventory
+var direction
+
+var orientation
 
 var ref_pos:Vector2 = Vector2.ZERO
 
@@ -21,8 +24,8 @@ enum STATE {
 }
 var state
 
-@onready var attack_area = $sprite/AttackArea
-@onready var animated_sprite = $sprite/AnimatedSprite2D
+@onready var attack_area = $Node2D/AttackArea
+@onready var animated_sprite = $AnimatedSprite2D
 
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	hp = _hp
@@ -33,8 +36,10 @@ func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	position = _pos_0
 	ref_pos = _pos_0
 	state = STATE.default
+	orientation = "right"
 	
 func be_attacked(delta_hp:float):
+	state = STATE.being_attacked
 	hp -= delta_hp
 	#여기에 피격시 발생할 일들 추가
 	
@@ -74,14 +79,17 @@ func _physics_process(dt: float) -> void:
 		
 		var dr = (ref_pos - position)
 		
-		if dr.length() > 20: animated_sprite.play("walk")
-		else: animated_sprite.play("idle")
+		if dr.dot(Vector2.RIGHT) > 1 : orientation = "right"
+		elif dr.dot(Vector2.RIGHT) < -1: orientation = "left"
 		
-		if dr.dot(Vector2.RIGHT) > 1 : scale.x = 1
-		elif dr.dot(Vector2.RIGHT) < -1: scale.x = -1
+		if orientation == "left" : $Node2D.scale.x = -1
+		else : $Node2D.scale.x = 1
+		
+		if dr.length() > 20: animated_sprite.play("move_" + orientation)
+		else: animated_sprite.play("idle_" + orientation)
 		
 	elif  state == STATE.attacking:
-		animated_sprite.play("attack")
+		animated_sprite.play("attack_" + orientation)
 	elif  state == STATE.being_attacked:
 		pass
 	elif state == STATE.devoting:
