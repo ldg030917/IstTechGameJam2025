@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bner5cmiorp76"]
+[gd_scene load_steps=3 format=3 uid="uid://bner5cmiorp76"]
 
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://Sacrifice.tscn" id="1_qsh3u"]
+[ext_resource type="SpriteFrames" uid="uid://cn55emanfpng4" path="res://sheep_sprite_frames.tres" id="2_02yij"]
 
 [node name="Sacrifice" instance=ExtResource("1_qsh3u")]
+type = 2
 
-[node name="ChasingSprite" parent="." index="6"]
+[node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
+
+[node name="AnimatedSprite2D" parent="." index="5"]
+sprite_frames = ExtResource("2_02yij")
+animation = &"heartpop_L"
+
+[node name="HeartPopArea" parent="." index="7"]
+collision_mask = 1
+
+[connection signal="body_entered" from="HeartPopArea" to="." method="_on_heart_pop_area_body_entered"]
+[connection signal="body_exited" from="HeartPopArea" to="." method="_on_heart_pop_area_body_exited"]

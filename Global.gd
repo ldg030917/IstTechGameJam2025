@@ -7,4 +7,3 @@ const a := 0.01
 
 func _process(delta: float) -> void:
 	god_gauge += delta * a
-	

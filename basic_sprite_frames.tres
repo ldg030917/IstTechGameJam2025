@@ -1,0 +1,102 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://bngg8t4yoroou"]
+
+[ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://test_npc_1.png" id="1_tpske"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"attack_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"attack_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"dead_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"dead_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"heartpop_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"heartpop_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"hurt_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": false,
+"name": &"hurt_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": true,
+"name": &"idle_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": true,
+"name": &"idle_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": true,
+"name": &"move_L",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tpske")
+}],
+"loop": true,
+"name": &"move_R",
+"speed": 5.0
+}]
