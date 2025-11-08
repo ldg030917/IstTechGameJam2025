@@ -12,7 +12,10 @@ func _ready():
 	if get_parent() and get_parent().get_parent():
 		if get_parent().get_parent() is PhysicsBody2D:
 			var parent = get_parent().get_parent()
-			linear_velocity += Vector2.RIGHT * (parent.ref_pos - parent.global_position) * 2
+			if parent is Player:
+				linear_velocity += Vector2.RIGHT * (parent.ref_pos - parent.global_position) * 2
+			else:
+				linear_velocity += Vector2.RIGHT * parent.linear_velocity.x
 	$Timer.timeout.connect(queue_free)
 	target_y_death = randf_range(global_position.y + min_y_death, global_position.y + max_y_death)
 
