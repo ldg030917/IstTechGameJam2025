@@ -78,10 +78,11 @@ region_rect = Rect2(179, 199.5, 46, 52)
 visible = false
 position = Vector2(16, -92)
 rotation = 1.72938
-scale = Vector2(1, 1)
 texture = ExtResource("3_lasvr")
 region_enabled = true
 region_rect = Rect2(179, 199.5, 46, 52)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

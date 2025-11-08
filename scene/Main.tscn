@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckjnnxfqliahl"]
+[gd_scene load_steps=9 format=3 uid="uid://ckjnnxfqliahl"]
 
 [ext_resource type="PackedScene" uid="uid://c6sc66ex35uf7" path="res://scene/player.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://b3v557u28b3as" path="res://scene/Altar.tscn" id="3_r0du0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://scene/Sheep.tscn" id="6_03owx"]
 [ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://scene/Fanatic.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://scene/Heretic.tscn" id="8_20pc6"]
+[ext_resource type="Script" uid="uid://8lyb7mhvqpmw" path="res://scene/canvas_layer.gd" id="8_eik88"]
 
 [node name="Main" type="Node2D"]
 
@@ -18,9 +19,10 @@ scale = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[node name="Altar" parent="." instance=ExtResource("3_r0du0")]
+[node name="Altar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_r0du0")]
 position = Vector2(0, -300)
 collision_layer = 1
+player = NodePath("../player")
 
 [node name="MobSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_cm0pq")]
 mob_scenes = Array[PackedScene]([ExtResource("5_trn2v"), ExtResource("6_03owx"), ExtResource("7_wkp8b"), ExtResource("8_20pc6")])
@@ -32,3 +34,18 @@ player = NodePath("../player")
 position = Vector2(573, 163)
 speed = 180.0
 chase_speed = 700.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("8_eik88")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.263
+anchor_bottom = 0.263
+offset_left = -486.0
+offset_top = -0.0400085
+offset_right = 485.0
+offset_bottom = 26.96
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 3.0

@@ -23,6 +23,7 @@ var wander_target_position = Vector2.ZERO
 # 1은 오른쪽 -1은 왼쪽
 var facing_left := true
 var player :Player = null
+var is_heartpop := false
 
 enum Type { HOSTILE, NEUTRAL, FRIENDLY }
 enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
@@ -34,14 +35,19 @@ func _ready() -> void:
 		$AttackArea/CollisionShape2D.disabled = true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("devote") and player != null:
+	if event.is_action_pressed("devote") and player != null and !is_heartpop:
 		player.get_heart(dgg)
 		player = null
+		is_heartpop = true
 		print("Get heart")
 		if facing_left:
 			animation_sprite.play("heartpop_L")
 		else:
 			animation_sprite.play("heartpop_R")
+		var tween = create_tween()
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 3)
+		await tween.finished
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	$Label.text = str(state)
@@ -122,9 +128,9 @@ func _on_chase_area_body_exited(body: Node2D) -> void:
 		is_wandering = false
 		chasing_sprite.hide()
 
-func hurt(damage: int, subject_pos: Vector2):
+func hurt(damage: int, subject_pos: Vector2) -> bool:
 	if state == State.DEAD:
-		return
+		return false
 		
 	state = State.HURT
 	hp -= damage
@@ -147,6 +153,7 @@ func hurt(damage: int, subject_pos: Vector2):
 			animation_sprite.play("dead_L")
 		else:
 			animation_sprite.play("dead_R")
+	return true
 
 func _on_idle_action_timer_timeout() -> void:
 	var random_chance = randf()

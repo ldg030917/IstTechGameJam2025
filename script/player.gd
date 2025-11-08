@@ -27,6 +27,8 @@ var state
 
 var last_dgg:float = 0
 
+signal devoted(inventory: Array[float])
+
 @onready var attack_area = $Node2D/AttackArea
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -67,8 +69,8 @@ func attack():
 	# 2. 겹친 바디들을 하나씩 순회합니다.
 	for body in overlapping_bodies:
 		if body is Sacrifice:
-			body.hurt(atk, position)
-			make_sound(penetrate_sound, 3.0)
+			if body.hurt(atk, position):
+				make_sound(penetrate_sound, 3.0)
 		# 3. 이 바디가 "적"(enemy)인지 확인합니다. (그룹 사용을 추천)
 		#(적 씬에서 "enemy" 그룹에 추가해두어야 함)      
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
@@ -90,11 +92,10 @@ func _goto_ref_pos(dt:float):
 func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 	
-func devote() -> Array:
-	if len(inventory) == 0 : return []
+func devote() -> void:
+	if len(inventory) == 0 : return
 	speed = 0
 	state = STATE.devoting
-	return inventory
 	
 func get_heart(dgg):
 	if inventory.size() >= 3:
@@ -171,9 +172,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 	if animated_sprite.animation == "devoting":
 		#print(inventory)
-		for heart in inventory:
-			Global.god_gauge -= heart
-			
+		devoted.emit(inventory)
 		inventory = []
 		#print(inventory)
 		
