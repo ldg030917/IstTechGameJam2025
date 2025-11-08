@@ -71,6 +71,8 @@ func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 
 func _physics_process(dt: float) -> void:
+	z_index = global_position.y
+	
 	if state == STATE.default:
 		$AnimatedSprite2D.position = Vector2.ZERO
 		if Input.is_action_just_pressed("attack"): attack()
