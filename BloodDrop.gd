@@ -4,13 +4,18 @@ extends RigidBody2D
 @export var sprite_rotation_offset_degrees : float = 0.0
 
 var min_y_death : float
-var max_y_death : float 
-
+var max_y_death : float
 var target_y_death : float
 
 func _ready():
+	if get_parent() and get_parent().get_parent():
+		if get_parent().get_parent() is PhysicsBody2D:
+			var parent = get_parent().get_parent()
+			print(parent.ref_pos - parent.global_position)
+			linear_velocity += Vector2.RIGHT * (parent.ref_pos - parent.global_position) * 2
 	$Timer.timeout.connect(queue_free)
-	target_y_death = randf_range(min_y_death, max_y_death)
+	target_y_death = randf_range(global_position.y + min_y_death, global_position.y + max_y_death)
+
 
 func _physics_process(delta):
 	if linear_velocity.length() > 0.1:

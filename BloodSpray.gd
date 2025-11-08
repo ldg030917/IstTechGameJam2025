@@ -29,11 +29,8 @@ func _process(delta):
 			queue_free()
 			return
 		
-		# [수정] 타이머 로직 변경
 		emission_timer -= delta
 		
-		# 타이머가 0 이하가 되면 스폰
-		# 'while' 루프를 사용해 프레임이 길어져도 스폰 개수를 맞춥니다.
 		while emission_timer <= 0:
 			spawn_drop()
 			# 다음 스폰까지의 랜덤한 시간을 계산해서 (음수가 된) 타이머에 더함
@@ -71,7 +68,6 @@ func spawn_drop():
 	drop.max_y_death = max_y_death
 	get_parent().add_child.call_deferred(drop)
 	
-	drop.global_position = self.global_position
 	
 	var speed = randf_range(speed_min, speed_max)
 	var angle_rad : float
