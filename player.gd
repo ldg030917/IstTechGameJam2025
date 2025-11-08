@@ -40,12 +40,14 @@ func attack():
 	speed = speed_0*0.1
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
+	#print(overlapping_bodies)
 	# 2. 겹친 바디들을 하나씩 순회합니다.
 	for body in overlapping_bodies:
+		if body is Sacrifice:
+			body.hurt(atk)
 		# 3. 이 바디가 "적"(enemy)인지 확인합니다. (그룹 사용을 추천)
 		#(적 씬에서 "enemy" 그룹에 추가해두어야 함)      
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
-		if body.has_method("be_attacked"): body.be_attacked(atk) # 10의 대미지를 입힘
 
 func _set_ref_pos(dt:float):
 	if Input.is_action_pressed("up"): ref_pos += dt*speed*Vector2.UP
