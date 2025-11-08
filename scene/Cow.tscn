@@ -18,3 +18,4 @@ frame_progress = 0.882243
 
 [node name="AnimatedSprite2D" parent="." index="5"]
 sprite_frames = ExtResource("2_2quor")
+animation = &"hurt_L"

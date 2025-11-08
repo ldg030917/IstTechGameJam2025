@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://script/Sacrifice.gd" id="1_50n5x"]
-[ext_resource type="SpriteFrames" uid="uid://bngg8t4yoroou" path="res://scene/basic_sprite_frames.tres" id="12_12xoo"]
+[ext_resource type="SpriteFrames" uid="uid://b0auwf8uhe4bm" path="res://scene/heretic_sprite_frames.tres" id="2_51u1b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
 size = Vector2(100, 100)
@@ -59,7 +59,7 @@ size = Vector2(200, 150)
 
 [node name="Sacrifice" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 128
 motion_mode = 1
 script = ExtResource("1_50n5x")
 
@@ -89,7 +89,7 @@ autoplay = "default"
 frame_progress = 0.914646
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("12_12xoo")
+sprite_frames = ExtResource("2_51u1b")
 animation = &"heartpop_L"
 
 [node name="Label" type="Label" parent="."]

@@ -30,6 +30,8 @@ enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
 func _ready() -> void:
 	state = State.IDLE
 	_on_idle_action_timer_timeout()
+	if type == Type.FRIENDLY:
+		$AttackArea/CollisionShape2D.disabled = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("devote") and player != null:
