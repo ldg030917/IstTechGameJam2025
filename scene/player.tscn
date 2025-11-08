@@ -260,7 +260,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_left",
-"speed": 15.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -286,7 +286,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_right",
-"speed": 15.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -404,9 +404,7 @@ texture = ExtResource("2_76oay")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_1xqrm")
-animation = &"devoting"
-frame = 9
-frame_progress = 1.0
+animation = &"hurt_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 26)
@@ -429,4 +427,19 @@ volume_db = 10.0
 
 [node name="sounds" type="Node2D" parent="."]
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0, 0.803847, 0.117471, 1)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+
+[connection signal="hp_changed" from="." to="ProgressBar" method="set_fill_mode"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

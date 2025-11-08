@@ -6,7 +6,6 @@ const inventory_size:int = 3
 
 var speed_0:float
 
-var hp:float
 var speed:float
 var atk:float
 var inventory: Array
@@ -25,6 +24,10 @@ enum STATE {
 }
 var state
 
+signal hp_changed(current_hp)
+var max_hp:float = 10.0
+@onready var hp_bar: ProgressBar = $ProgressBar
+
 var last_dgg:float = 0
 
 @onready var attack_area = $Node2D/AttackArea
@@ -34,8 +37,22 @@ var last_dgg:float = 0
 @onready var penetrate_sound = load("res://asset/audio/penetrated.mp3")
 @onready var heart_poping_sound = load("res://asset/audio/heart_pop.mp3")
 
+var hp: float:
+	set(value):
+		hp = clamp(value, 0, max_hp)
+		
+		# 3. 체력바의 값을 *직접* 업데이트합니다.
+		if hp_bar: # 노드가 준비되었는지 확인
+			hp_bar.value = hp
+			print(hp_bar.value)
+		
+		# 4. 다른 시스템(예: 메인 HUD)을 위해 시그널도 방출합니다.
+		hp_changed.emit(hp)
+	
+	get:
+		return hp
+
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
-	hp = _hp
 	speed_0 = _speed
 	speed = speed_0
 	atk = _atk
@@ -44,6 +61,13 @@ func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	ref_pos = _pos_0
 	state = STATE.default
 	orientation = "right"
+
+	# 5. 체력바의 최대값을 설정합니다.
+	if hp_bar:
+		hp_bar.max_value = max_hp
+		
+	print(max_hp)
+	hp = max_hp # (set 함수가 호출되며 3, 4번이 실행됩니다)
 	
 func hurt(delta_hp:float, subject_pos:Vector2):
 	if state == STATE.hurt : return
@@ -185,3 +209,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		print(inventory)
 		speed = speed_0
 		state = STATE.default
+		
+	if animated_sprite.animation == "hurt_left" or animated_sprite.animation == "hurt_right":
+		print("sadf")
+		state = STATE.default
+		speed = speed_0
