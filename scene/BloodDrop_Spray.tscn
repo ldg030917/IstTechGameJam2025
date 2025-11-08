@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxoqwj167gb0o"]
+
+[ext_resource type="Script" path="res://BloodSprayWrapper.gd" id="1_08cmu"]
+[ext_resource type="PackedScene" uid="uid://eteqrj3qasnq" path="res://scene/BloodSpray.tscn" id="1_cw1o5"]
+[ext_resource type="PackedScene" uid="uid://dn1gw0jik7xmp" path="res://scene/BloodDrop.tscn" id="2_wexrk"]
+
+[node name="BloodDropSpray" type="Node2D"]
+script = ExtResource("1_08cmu")
+mode = 1
+amount = 3
+speed_min = 150.0
+speed_max = 200.0
+base_direction_degrees = -90.0
+spread_degrees = 180.0
+blood_drop_scene = ExtResource("2_wexrk")
+max_y_death = 120.0
+time_randomness = 0.6
+
+[node name="BloodSpray" parent="." instance=ExtResource("1_cw1o5")]
+mode = 1
+amount = 2
+min_y_death = 100.0
+max_y_death = 120.0
+time_randomness = 0.3

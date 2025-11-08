@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4vsy48i62d6f"]
-
-[ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://Sacrifice.tscn" id="1_aeko1"]
-
-[node name="Sacrifice" instance=ExtResource("1_aeko1")]
-
-[node name="ChasingSprite" parent="." index="4"]
-frame_progress = 0.882243

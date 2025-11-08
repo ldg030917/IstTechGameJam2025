@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=0 format=3 uid="uid://cspo5qfh81g50"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack_L",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"attack_R",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dead2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hurt_L",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hurt_R",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle_L",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle_R",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"move_L",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"move_R",
+"speed": 5.0
+}]

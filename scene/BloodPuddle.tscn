@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwtvbpmnhc2si"]
+
+[ext_resource type="Script" path="res://blood_puddle.gd" id="1_s5f1m"]
+[ext_resource type="Texture2D" uid="uid://rx1lt7366div" path="res://asset/puddle.png" id="1_tamr3"]
+
+[node name="BloodPuddle" type="Node2D"]
+script = ExtResource("1_s5f1m")
+stay_duration = 2.0
+fade_duration = 3.0
+base_scale = 0.1
+max_scale = 0.5
+merge_radius = 15.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_tamr3")
