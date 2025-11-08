@@ -34,10 +34,15 @@ func be_attacked(delta_hp:float):
 	#여기에 피격시 발생할 일들 추가
 	
 func attack():
+<<<<<<< Updated upstream
 	if is_attacking: return # 이미 공격중이면 실행 안함
 	
 	is_attacking = true
 	speed = speed_0*0.1
+=======
+	state = STATE.attacking
+	speed = 0
+>>>>>>> Stashed changes
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	#print(overlapping_bodies)
@@ -63,6 +68,7 @@ func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 
 func _physics_process(dt: float) -> void:
+<<<<<<< Updated upstream
 	if Input.is_action_just_pressed("attack"): attack()
 	_set_ref_pos(dt)
 	_goto_ref_pos(dt)
@@ -82,4 +88,39 @@ func _animation_flow():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack": 
 		is_attacking = false
+=======
+	if state == STATE.default:
+		$AnimatedSprite2D.position = Vector2.ZERO
+		if Input.is_action_just_pressed("attack"): attack()
+		_set_ref_pos(dt)
+		_goto_ref_pos(dt)
+		
+		var dr = (ref_pos - position)
+		
+		if dr.dot(Vector2.RIGHT) > 1 : orientation = "right"
+		elif dr.dot(Vector2.RIGHT) < -1: orientation = "left"
+		
+		if orientation == "left" : $Node2D.scale.x = -1
+		else : $Node2D.scale.x = 1
+		
+		if dr.length() > 20: animated_sprite.play("move_" + orientation)
+		else: animated_sprite.play("idle_" + orientation)
+		
+	elif  state == STATE.attacking:
+		$AnimatedSprite2D.position = 20 * _convert_orientation_to_num(orientation) * Vector2.RIGHT
+		animated_sprite.play("attack_" + orientation)
+		
+	elif  state == STATE.being_attacked:
+		pass
+	elif state == STATE.devoting:
+		pass
+		
+func _convert_orientation_to_num(_orientation):
+	if _orientation == "left" : return -1
+	elif _orientation == "right" : return 1
+	
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right":
+		state = STATE.default
+>>>>>>> Stashed changes
 		speed = speed_0
