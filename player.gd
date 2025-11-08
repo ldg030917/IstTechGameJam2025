@@ -31,7 +31,7 @@ func _set_ref_pos(dt:float):
 	if Input.is_action_pressed("up"): ref_pos += dt*speed*Vector2.UP
 	if Input.is_action_pressed("down"): ref_pos += dt*speed*Vector2.DOWN
 	if Input.is_action_pressed("left"): ref_pos += dt*speed*Vector2.LEFT
-	if Input.is_action_pressed("right"): ref_pos += dt*speed*Vector2.RIGHT	
+	if Input.is_action_pressed("right"): ref_pos += dt*speed*Vector2.RIGHT
 
 func _goto_ref_pos(dt:float):
 	const k = 5.0
@@ -41,5 +41,8 @@ func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 
 func _physics_process(dt: float) -> void:
+	#var direction = Input.get_vector("left", "right", "up", "down")
+	#velocity = direction * speed
+	#move_and_slide()
 	_set_ref_pos(dt)
 	_goto_ref_pos(dt)

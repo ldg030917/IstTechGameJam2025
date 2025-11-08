@@ -12,7 +12,8 @@ position = Vector2(39, 55)
 
 [node name="Sacrifice" parent="." instance=ExtResource("2_r0du0")]
 position = Vector2(291, 57)
+speed = 100.0
 
 [node name="Sacrifice2" parent="." instance=ExtResource("2_r0du0")]
 position = Vector2(-543, 265)
-speed = 1.0
+speed = 100.0

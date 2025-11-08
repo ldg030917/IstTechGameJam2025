@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Sacrifice
+
 @export var speed: float = 0
 @export var hp: int = 10
 @export var Dgg: float = 0.1 # Delta god gauge
@@ -18,9 +20,7 @@ func _physics_process(delta: float) -> void:
 			pass
 		State.CHASE:
 			var direction = global_position.direction_to(target.global_position)
-			#print(direction)
 			velocity = direction * speed
-			#print(velocity)
 	
 	move_and_slide()
 
