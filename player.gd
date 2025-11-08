@@ -13,9 +13,13 @@ var inventory
 
 var ref_pos:Vector2 = Vector2.ZERO
 
-var is_attacking:bool = false
-
-var target
+enum STATE {
+	default,
+	attacking,
+	being_attacked,
+	devoting
+}
+var state
 
 @onready var attack_area = $sprite/AttackArea
 @onready var animated_sprite = $sprite/AnimatedSprite2D
@@ -28,16 +32,16 @@ func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	inventory = []
 	position = _pos_0
 	ref_pos = _pos_0
+	state = STATE.default
 	
 func be_attacked(delta_hp:float):
 	hp -= delta_hp
 	#여기에 피격시 발생할 일들 추가
 	
 func attack():
-	if is_attacking: return # 이미 공격중이면 실행 안함
+	state = STATE.attacking
 	
-	is_attacking = true
-	speed = speed_0*0.1
+	speed = 0
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	#print(overlapping_bodies)
@@ -63,23 +67,27 @@ func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 
 func _physics_process(dt: float) -> void:
-	if Input.is_action_just_pressed("attack"): attack()
-	_set_ref_pos(dt)
-	_goto_ref_pos(dt)
-	_animation_flow()
-	
-func _animation_flow():
-	var dr = (ref_pos - position)
-	
-	if is_attacking: animated_sprite.play("attack")
-	else:
+	if state == STATE.default:
+		if Input.is_action_just_pressed("attack"): attack()
+		_set_ref_pos(dt)
+		_goto_ref_pos(dt)
+		
+		var dr = (ref_pos - position)
+		
 		if dr.length() > 20: animated_sprite.play("walk")
 		else: animated_sprite.play("idle")
-			
-	if dr.dot(Vector2.RIGHT) > 1 : scale.x = 1
-	elif dr.dot(Vector2.RIGHT) < -1: scale.x = -1
+		
+		if dr.dot(Vector2.RIGHT) > 1 : scale.x = 1
+		elif dr.dot(Vector2.RIGHT) < -1: scale.x = -1
+		
+	elif  state == STATE.attacking:
+		animated_sprite.play("attack")
+	elif  state == STATE.being_attacked:
+		pass
+	elif state == STATE.devoting:
+		pass
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack": 
-		is_attacking = false
+		state = STATE.default
 		speed = speed_0
