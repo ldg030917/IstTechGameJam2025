@@ -32,6 +32,7 @@ var last_dgg:float = 0
 
 @onready var attack_sound = load("res://asset/audio/player_atk.mp3")
 @onready var penetrate_sound = load("res://asset/audio/penetrated.mp3")
+@onready var heart_poping_sound = load("res://asset/audio/heart_pop.mp3")
 
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	hp = _hp
