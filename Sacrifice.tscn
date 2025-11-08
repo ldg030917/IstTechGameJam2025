@@ -101,7 +101,6 @@ offset_bottom = 69.0
 label_settings = SubResource("LabelSettings_12xoo")
 
 [node name="HeartPopArea" type="Area2D" parent="."]
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartPopArea"]
 shape = SubResource("CircleShape2D_jum4h")
@@ -111,3 +110,5 @@ disabled = true
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="timeout" from="IdleActionTimer" to="." method="_on_idle_action_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="HeartPopArea" to="." method="_on_heart_pop_area_body_entered"]
+[connection signal="body_exited" from="HeartPopArea" to="." method="_on_heart_pop_area_body_exited"]

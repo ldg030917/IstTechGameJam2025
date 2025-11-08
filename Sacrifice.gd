@@ -4,6 +4,7 @@ class_name Sacrifice
 
 @onready var idle_action_timer = $IdleActionTimer
 @onready var animation_sprite = $AnimatedSprite2D
+var blooddrop_burst = load("res://BloodDrop_Burst.tscn")
 
 @export var speed: float = 100
 @export var hp: float = 10
@@ -46,6 +47,8 @@ func _physics_process(delta: float) -> void:
 			pass
 		State.CHASE:
 			chase_state_logic()
+		State.ATTACK:
+			attack_state_logic(delta)
 		State.HURT:
 			hurt_state_logic()
 		_:
@@ -77,6 +80,7 @@ func chase_state_logic():
 	velocity = direction * speed
 
 func attack_state_logic(delta):
+	
 	pass
 
 func hurt_state_logic():
@@ -107,6 +111,8 @@ func hurt(damage: int):
 		
 	state = State.HURT
 	hp -= damage
+	#var blooddrop_burst_scene = blooddrop_burst.instantiate()
+	#add_child(blooddrop_burst_scene)
 	
 	#print("hurt")
 	if hp <= 0:
@@ -115,11 +121,11 @@ func hurt(damage: int):
 		$ChaseArea/CollisionShape2D.disabled = true
 		$HeartPopArea/CollisionShape2D.disabled = false
 		$ChasingSprite.hide()
+		animation_sprite.modulate = Color.AQUA
 		if facing_left:
 			animation_sprite.play("dead_L")
 		else:
 			animation_sprite.play("dead_R")
-		self_modulate.a = 0.5
 
 func _on_idle_action_timer_timeout() -> void:
 	var random_chance = randf()
@@ -146,6 +152,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_heart_pop_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player = body
+		animation_sprite.modulate = Color.RED
 		
 
 
