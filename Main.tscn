@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckjnnxfqliahl"]
+
+[ext_resource type="PackedScene" path="res://player.tscn" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://Sacrifice.tscn" id="2_r0du0"]
+
+[node name="Main" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_uu6xs")]
+position = Vector2(39, 55)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="Sacrifice" parent="." instance=ExtResource("2_r0du0")]
+position = Vector2(291, 57)

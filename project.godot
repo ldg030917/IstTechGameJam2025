@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="IstTech2025GameJam"
-run/main_scene="uid://c6sc66ex35uf7"
+run/main_scene="uid://ckjnnxfqliahl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [input]
 

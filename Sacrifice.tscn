@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqg6c0voa3kdc"]
+
+[ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://Sacrifice.gd" id="1_50n5x"]
+[ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://test_npc_1.png" id="2_jum4h"]
+
+[node name="Sacrifice" type="CharacterBody2D"]
+script = ExtResource("1_50n5x")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jum4h")
+
+[node name="SightArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea"]
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+
+[connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
