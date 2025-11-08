@@ -10,7 +10,7 @@ var state: State = State.IDLE
 var target: Node2D
 
 enum Type { HOSTILE, NEUTRAL, FRIENDLY }
-enum State { IDLE, CHASE, ATTACK, STUN }
+enum State { IDLE, CHASE, ATTACK, STUN, DEAD }
 
 
 func _physics_process(delta: float) -> void:
@@ -38,5 +38,8 @@ func _on_chasing_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		state = State.IDLE
 
-func hurt():
-	pass
+func hurt(damage: int):
+	hp -= damage
+	if hp <= 0:
+		state = State.DEAD
+		self_modulate.a = 0.5
