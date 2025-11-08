@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c610q3ejgkn6l"]
+
+[ext_resource type="Shader" uid="uid://dbuclvw34811n" path="res://CameraEffect.gdshader" id="1_mj3on"]
+[ext_resource type="Script" uid="uid://co7reck7w8gco" path="res://SightEffect.gd" id="2_ws5md"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywame"]
+shader = ExtResource("1_mj3on")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/radius = 0.5
+shader_parameter/smoothness = 0.5
+
+[node name="CameraEffect" type="CanvasLayer"]
+script = ExtResource("2_ws5md")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ywame")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
