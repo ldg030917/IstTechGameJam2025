@@ -27,6 +27,8 @@ var state
 @onready var attack_area = $Node2D/AttackArea
 @onready var animated_sprite = $AnimatedSprite2D
 
+@onready var attack_sound = load("res://asset/audio/player_atk.mp3")
+
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	hp = _hp
 	speed_0 = _speed
@@ -58,7 +60,7 @@ func attack():
 	# 2. 겹친 바디들을 하나씩 순회합니다.
 	for body in overlapping_bodies:
 		if body is Sacrifice:
-			body.hurt(atk)
+			body.hurt(atk, position)
 		# 3. 이 바디가 "적"(enemy)인지 확인합니다. (그룹 사용을 추천)
 		#(적 씬에서 "enemy" 그룹에 추가해두어야 함)      
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
@@ -96,6 +98,7 @@ func _physics_process(dt: float) -> void:
 	
 	if state == STATE.default:
 		$AnimatedSprite2D.position = Vector2.ZERO
+		
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
 		_set_ref_pos(dt)
 		_goto_ref_pos(dt)
@@ -105,8 +108,12 @@ func _physics_process(dt: float) -> void:
 		if dr.dot(Vector2.RIGHT) > 10 : orientation = "right"
 		elif dr.dot(Vector2.RIGHT) < -10: orientation = "left"
 		
-		if dr.length() > 20: animated_sprite.play("move_" + orientation)
-		else: animated_sprite.play("idle_" + orientation)
+		if dr.length() > 20:
+			animated_sprite.play("move_" + orientation)
+			if $walk_sound.playing == false : $walk_sound.play()
+		else: 
+			animated_sprite.play("idle_" + orientation)
+			$walk_sound.stop()
 		
 		if Input.is_action_just_pressed("attack"): attack()
 	#	if Input.is_action_just_pressed("devote"): hurt(100, Vector2(randf_range(-1, 1),randf_range(-1, 1)) + position)
@@ -128,6 +135,14 @@ func _physics_process(dt: float) -> void:
 func _convert_orientation_to_num(_orientation):
 	if _orientation == "left" : return -1
 	elif _orientation == "right" : return 1
+	
+func make_sound(_sound):
+	var s = AudioStreamPlayer2D.new()
+	s.stream = _sound
+	$sounds.add_child(s)
+	s.play()
+	
+
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right":

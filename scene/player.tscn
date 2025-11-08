@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c6sc66ex35uf7"]
+[gd_scene load_steps=61 format=3 uid="uid://c6sc66ex35uf7"]
 
 [ext_resource type="Script" uid="uid://0e361ph7pucw" path="res://script/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dg6hfuk8140vk" path="res://asset/circle-512.png" id="2_76oay"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://dkkrjnb0qoxy8" path="res://asset/ani/move_R/6.png" id="49_cmg3n"]
 [ext_resource type="Texture2D" uid="uid://w8dqja4ts7tn" path="res://asset/ani/move_R/7.png" id="50_d1347"]
 [ext_resource type="Texture2D" uid="uid://c0dcl4627knod" path="res://asset/ani/move_R/8.png" id="51_h4gvw"]
+[ext_resource type="AudioStream" uid="uid://cqnw2uu1tqlkc" path="res://asset/audio/walking1.mp3" id="57_c8aaj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1xqrm"]
 animations = [{
@@ -303,5 +304,11 @@ collision_mask = 2
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="Node2D/AttackArea"]
 position = Vector2(29, 10.875)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="walk_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("57_c8aaj")
+volume_db = 10.0
+
+[node name="sounds" type="Node2D" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
