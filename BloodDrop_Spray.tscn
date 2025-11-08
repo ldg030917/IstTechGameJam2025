@@ -7,14 +7,14 @@
 [node name="BloodDropSpray" type="Node2D"]
 script = ExtResource("1_08cmu")
 mode = 1
-amount = 2
+amount = 3
 speed_min = 150.0
 speed_max = 200.0
 base_direction_degrees = -90.0
 spread_degrees = 180.0
 blood_drop_scene = ExtResource("2_wexrk")
 max_y_death = 120.0
-time_randomness = 0.3
+time_randomness = 0.6
 
 [node name="BloodSpray" parent="." instance=ExtResource("1_cw1o5")]
 mode = 1
