@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckjnnxfqliahl"]
+[gd_scene load_steps=4 format=3 uid="uid://ckjnnxfqliahl"]
 
 [ext_resource type="PackedScene" uid="uid://c6sc66ex35uf7" path="res://player.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://Sacrifice.tscn" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://b3v557u28b3as" path="res://Altar.tscn" id="3_r0du0"]
 
 [node name="Main" type="Node2D"]
 
@@ -14,3 +15,6 @@ position_smoothing_speed = 8.0
 
 [node name="Sacrifice" parent="." instance=ExtResource("2_r0du0")]
 position = Vector2(403, -5)
+
+[node name="Altar" parent="." instance=ExtResource("3_r0du0")]
+position = Vector2(123, 867)

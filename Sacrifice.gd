@@ -5,10 +5,12 @@ class_name Sacrifice
 @onready var wander_timer = $Wander
 @onready var animation_player = $AnimationPlayer
 
-@export var speed: float = 10
-@export var hp: float = 5
+@export var speed: float = 1
+@export var hp: float = 10
 @export var Dgg: float = 0.1 # Delta god gauge
-@export var attack: float = 1
+@export var attack: float = 1.2
+@export var type: Type = Type.HOSTILE
+
 var state: State = State.IDLE
 var target: Node2D
 

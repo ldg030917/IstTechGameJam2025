@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://f75gbexwqgtt"]
+
+[ext_resource type="Script" uid="uid://8vaypqsj0mss" path="res://MobSpawner.gd" id="1_rkbsk"]
+[ext_resource type="PackedScene" uid="uid://boij4g3h1477e" path="res://Cow.tscn" id="2_86tda"]
+[ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://Sheep.tscn" id="3_sxtps"]
+[ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://Fanatic.tscn" id="4_gq7b7"]
+[ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://Heretic.tscn" id="5_nom6u"]
+
+[node name="MobSpawner" type="Node"]
+script = ExtResource("1_rkbsk")
+cow_scene = Array[PackedScene]([ExtResource("2_86tda"), ExtResource("3_sxtps"), ExtResource("4_gq7b7"), ExtResource("5_nom6u")])
+max_mob_count = null
+min_spawn_radius = null
+max_spawn_radius = null
+spawn_attempts_per_tick = null
+
+[node name="Timer" type="Timer" parent="."]
