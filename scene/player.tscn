@@ -342,7 +342,7 @@ radius = 9.0
 height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(58, 24.25)
+size = Vector2(87, 24.25)
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
@@ -371,7 +371,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="Node2D/AttackArea"]
-position = Vector2(29, 10.875)
+position = Vector2(43.5, 10.875)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="walk_sound" type="AudioStreamPlayer2D" parent="."]
