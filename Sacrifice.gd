@@ -23,6 +23,7 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	z_index = global_position.y
 	match state:
 		State.IDLE:
 			velocity = Vector2.ZERO
