@@ -1,22 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=5 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://Sacrifice.gd" id="1_50n5x"]
 [ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://test_npc_1.png" id="2_jum4h"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
+size = Vector2(196, 198)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jum4h"]
+radius = 556.044
+
 [node name="Sacrifice" type="CharacterBody2D"]
 script = ExtResource("1_50n5x")
 
-[node name="Hurtbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_jum4h")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jum4h")
 
 [node name="SightArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="SightArea"]
+polygon = PackedVector2Array(-1, 36, 100, 150, 0, 200, -100, 150)
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="ChasingArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChasingArea"]
+shape = SubResource("CircleShape2D_jum4h")
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
+[connection signal="body_exited" from="ChasingArea" to="." method="_on_chasing_area_body_exited"]
