@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=10 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://script/Sacrifice.gd" id="1_50n5x"]
 [ext_resource type="SpriteFrames" uid="uid://bngg8t4yoroou" path="res://scene/basic_sprite_frames.tres" id="12_12xoo"]
@@ -10,7 +10,7 @@ size = Vector2(100, 100)
 radius = 284.044
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpjd2"]
-radius = 374.534
+radius = 827.196
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fida2"]
 animations = [{
@@ -54,6 +54,9 @@ font_color = Color(0, 0, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jum4h"]
 radius = 160.378
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51u1b"]
+size = Vector2(200, 150)
+
 [node name="Sacrifice" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -87,7 +90,7 @@ frame_progress = 0.914646
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("12_12xoo")
-animation = &"dead_R"
+animation = &"heartpop_L"
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -100,9 +103,15 @@ label_settings = SubResource("LabelSettings_12xoo")
 shape = SubResource("CircleShape2D_jum4h")
 disabled = true
 
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_51u1b")
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="timeout" from="IdleActionTimer" to="." method="_on_idle_action_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HeartPopArea" to="." method="_on_heart_pop_area_body_entered"]
 [connection signal="body_exited" from="HeartPopArea" to="." method="_on_heart_pop_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

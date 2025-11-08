@@ -25,5 +25,7 @@ position = Vector2(123, 867)
 mob_scenes = Array[PackedScene]([ExtResource("5_trn2v"), ExtResource("6_03owx"), ExtResource("7_wkp8b"), ExtResource("8_20pc6")])
 player = NodePath("../player")
 
-[node name="Sacrifice" parent="." instance=ExtResource("6_03owx")]
-position = Vector2(272, 82)
+[node name="Sacrifice" parent="." instance=ExtResource("5_trn2v")]
+position = Vector2(573, 163)
+speed = 180.0
+chase_speed = 700.0

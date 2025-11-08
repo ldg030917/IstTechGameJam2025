@@ -8,6 +8,7 @@ class_name Sacrifice
 var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 
 @export var speed: float = 100
+@export var chase_speed: float = 100
 @export var hp: float = 10
 @export var dgg: float = 0.1 # Delta god gauge
 @export var attack: float = 1.2
@@ -33,6 +34,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("devote") and player != null:
 		player.get_heart(dgg)
+		player = null
 		print("Get heart")
 		if facing_left:
 			animation_sprite.play("heartpop_L")
@@ -47,7 +49,7 @@ func _physics_process(delta: float) -> void:
 			idle_state_logic(delta)
 			pass
 		State.CHASE:
-			chase_state_logic()
+			chase_state_logic(delta)
 		State.ATTACK:
 			attack_state_logic(delta)
 		State.HURT:
@@ -62,7 +64,7 @@ func _physics_process(delta: float) -> void:
 func idle_state_logic(delta):
 	if is_wandering:
 		var direction = (wander_target_position - global_position).normalized()
-		velocity = velocity.lerp(direction * speed, 0.1)
+		velocity = velocity.lerp(direction * speed, 1 * delta)
 		if facing_left:
 			animation_sprite.play("move_L")
 		else:
@@ -77,12 +79,22 @@ func idle_state_logic(delta):
 		else:
 			animation_sprite.play("idle_R")
 
-func chase_state_logic():
+func chase_state_logic(delta):
 	var direction = global_position.direction_to(target.global_position)
-	var target_velocity = direction * speed
-	velocity = velocity.lerp(target_velocity, 0.1)
+	var target_velocity = direction * chase_speed
+	velocity = velocity.lerp(target_velocity, 1.5 * delta)
+	
+	if facing_left:
+		animation_sprite.play("move_L")
+	else:
+		animation_sprite.play("move_R")
 
 func attack_state_logic(delta):
+	velocity = Vector2.ZERO
+	if facing_left:
+		animation_sprite.play("attack_L")
+	else:
+		animation_sprite.play("attack_R")
 	
 	pass
 
@@ -143,17 +155,21 @@ func _on_idle_action_timer_timeout() -> void:
 	else:
 		is_wandering = false
 		
-	idle_action_timer.start(randf_range(2.0, 5.0))
+	idle_action_timer.start(randf_range(3.0, 6.0))
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if state == State.DEAD:
-		return
-	if animation_sprite.animation == "hurt_L" or animation_sprite.animation == "hurt_R":
-		state = State.CHASE
-		if type == Type.FRIENDLY:
-			state = State.IDLE
-
+	match state:
+		State.DEAD:
+			return
+		State.HURT:
+			state = State.CHASE
+			if type == Type.FRIENDLY:
+				state = State.IDLE
+		State.ATTACK:
+			state = State.CHASE
+			if type == Type.FRIENDLY:
+				state = State.IDLE
 
 
 func _on_heart_pop_area_body_entered(body: Node2D) -> void:
@@ -166,3 +182,9 @@ func _on_heart_pop_area_body_entered(body: Node2D) -> void:
 func _on_heart_pop_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		player = null
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.hurt(attack, position)
+		state = State.ATTACK

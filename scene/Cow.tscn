@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://boij4g3h1477e"]
+[gd_scene load_steps=3 format=3 uid="uid://boij4g3h1477e"]
 
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://scene/Sacrifice.tscn" id="1_reef3"]
+[ext_resource type="SpriteFrames" uid="uid://vse08y1otnvw" path="res://scene/cow_sprite_frames.tres" id="2_2quor"]
 
 [node name="Sacrifice" instance=ExtResource("1_reef3")]
+speed = 200.0
+chase_speed = 500.0
+hp = 5.0
+attack = 0.5
+type = 1
+
+[node name="IdleActionTimer" parent="." index="3"]
+wait_time = 3.0
 
 [node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
 
 [node name="AnimatedSprite2D" parent="." index="5"]
-animation = &"heartpop_L"
+sprite_frames = ExtResource("2_2quor")
