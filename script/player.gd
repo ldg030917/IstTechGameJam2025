@@ -20,14 +20,18 @@ enum STATE {
 	default,
 	attacking,
 	hurt,
-	devoting
+	devoting,
+	poping
 }
 var state
+
+var last_dgg:float = 0
 
 @onready var attack_area = $Node2D/AttackArea
 @onready var animated_sprite = $AnimatedSprite2D
 
 @onready var attack_sound = load("res://asset/audio/player_atk.mp3")
+@onready var penetrate_sound = load("res://asset/audio/penetrated.mp3")
 
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	hp = _hp
@@ -55,12 +59,15 @@ func attack():
 	state = STATE.attacking
 	speed = 0
 	
+	make_sound(attack_sound, -0.5, 0.31)
+	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	#print(overlapping_bodies)
 	# 2. 겹친 바디들을 하나씩 순회합니다.
 	for body in overlapping_bodies:
 		if body is Sacrifice:
 			body.hurt(atk, position)
+			make_sound(penetrate_sound, 3.0)
 		# 3. 이 바디가 "적"(enemy)인지 확인합니다. (그룹 사용을 추천)
 		#(적 씬에서 "enemy" 그룹에 추가해두어야 함)      
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
@@ -86,8 +93,9 @@ func devote():
 func get_heart(dgg):
 	if inventory.size() >= 3:
 		return
-	inventory.append(dgg)
-	print(inventory)
+	last_dgg = dgg
+	state = STATE.poping
+	speed = 0
 
 func _physics_process(dt: float) -> void:
 	#print(Global.god_gauge)
@@ -132,17 +140,20 @@ func _physics_process(dt: float) -> void:
 	elif state == STATE.devoting:
 		animated_sprite.play("devoting")
 		
+	elif state == STATE.poping:
+		animated_sprite.play("heart_poping")
+		
 func _convert_orientation_to_num(_orientation):
 	if _orientation == "left" : return -1
 	elif _orientation == "right" : return 1
 	
-func make_sound(_sound):
-	var s = AudioStreamPlayer2D.new()
+func make_sound(_sound, _db, _offset = null):
+	var s = Sound.new()
 	s.stream = _sound
+	s.volume_db = _db
 	$sounds.add_child(s)
-	s.play()
-	
-
+	var offset = 0 if _offset == null else _offset
+	s.play(offset)
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right":
@@ -159,3 +170,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 		state = STATE.default
 		speed = speed_0
+		
+	if animated_sprite.animation == "heart_poping":
+		inventory.append(last_dgg)
+		print(inventory)
+		speed = speed_0
+		state = STATE.default
