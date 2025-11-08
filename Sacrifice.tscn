@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=17 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://Sacrifice.gd" id="1_50n5x"]
-[ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://test_npc_1.png" id="2_jum4h"]
 [ext_resource type="Texture2D" uid="uid://dvsng4lg7iay3" path="res://WarningSign_PixyFantasy/WarningSign01.png" id="3_byk1j"]
 [ext_resource type="Texture2D" uid="uid://csk0xer5m6b6k" path="res://WarningSign_PixyFantasy/WarningSign02.png" id="4_12xoo"]
 [ext_resource type="Texture2D" uid="uid://dudlwt1eta37o" path="res://WarningSign_PixyFantasy/WarningSign03.png" id="5_rogsj"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://strbeie0fe0q" path="res://WarningSign_PixyFantasy/WarningSign07.png" id="9_pjvtf"]
 [ext_resource type="Texture2D" uid="uid://chwq5eyfkpht8" path="res://WarningSign_PixyFantasy/WarningSign08.png" id="10_dqemr"]
 [ext_resource type="Texture2D" uid="uid://eypfugojki2a" path="res://WarningSign_PixyFantasy/WarningSign09.png" id="11_4ppmq"]
+[ext_resource type="SpriteFrames" uid="uid://bngg8t4yoroou" path="res://basic_sprite_frames.tres" id="12_12xoo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
 size = Vector2(100, 100)
@@ -20,43 +20,6 @@ radius = 209.538
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpjd2"]
 radius = 374.534
-
-[sub_resource type="Animation" id="Animation_hpjd2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_jum4h"]
-resource_name = "death"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5708]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hpjd2"]
-_data = {
-&"RESET": SubResource("Animation_hpjd2"),
-&"death": SubResource("Animation_jum4h")
-}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fida2"]
 animations = [{
@@ -93,6 +56,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_12xoo"]
+font_size = 50
+font_color = Color(0, 0, 1, 1)
+
 [node name="Sacrifice" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -101,14 +68,6 @@ script = ExtResource("1_50n5x")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jum4h")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jum4h")
-
-[node name="Label" type="Label" parent="Sprite2D"]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="SightArea" type="Area2D" parent="."]
 
@@ -121,12 +80,9 @@ shape = SubResource("CircleShape2D_jum4h")
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_hpjd2")
 
-[node name="Wander" type="Timer" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hpjd2")
-}
+[node name="IdleActionTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="ChasingSprite" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -135,6 +91,22 @@ sprite_frames = SubResource("SpriteFrames_fida2")
 autoplay = "default"
 frame_progress = 0.914646
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("12_12xoo")
+animation = &"dead_R"
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 69.0
+label_settings = SubResource("LabelSettings_12xoo")
+
+[node name="HeartPopArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeartPopArea"]
+shape = SubResource("CircleShape2D_jum4h")
+disabled = true
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
-[connection signal="timeout" from="Wander" to="." method="_on_wander_timeout"]
+[connection signal="timeout" from="IdleActionTimer" to="." method="_on_idle_action_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
