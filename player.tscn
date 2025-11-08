@@ -206,7 +206,6 @@ script = ExtResource("1_4flbx")
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(20, 0)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_1xqrm")
 animation = &"attack_right"
