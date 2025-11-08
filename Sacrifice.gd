@@ -5,7 +5,7 @@ class_name Sacrifice
 @onready var wander_timer = $Wander
 @onready var animation_player = $AnimationPlayer
 
-@export var speed: float = 100
+@export var speed: float = 10
 @export var hp: float = 5
 @export var Dgg: float = 0.1 # Delta god gauge
 @export var attack: float = 1
@@ -37,19 +37,23 @@ func _on_sight_area_body_entered(body: Node2D) -> void:
 		print("CHASE")
 		target = body
 		state = State.CHASE
-		pass
+		$ChasingSprite.show()
 
-func _on_chasing_area_body_exited(body: Node2D) -> void:
+func _on_chase_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		state = State.IDLE
+		$ChasingSprite.hide()
 
 func hurt(damage: int):
+	if state == State.DEAD:
+		return
 	hp -= damage
 	$Sprite2D/Label.text = str(hp)
 	#print("hurt")
 	$Sprite2D.self_modulate = Color.RED
 	if hp <= 0:
 		state = State.DEAD
+		$ChasingSprite.hide()
 		animation_player.play("death")
 		self_modulate.a = 0.5
 

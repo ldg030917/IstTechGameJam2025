@@ -1,16 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=19 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://Sacrifice.gd" id="1_50n5x"]
 [ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://test_npc_1.png" id="2_jum4h"]
+[ext_resource type="Texture2D" uid="uid://dvsng4lg7iay3" path="res://WarningSign_PixyFantasy/WarningSign01.png" id="3_byk1j"]
+[ext_resource type="Texture2D" uid="uid://csk0xer5m6b6k" path="res://WarningSign_PixyFantasy/WarningSign02.png" id="4_12xoo"]
+[ext_resource type="Texture2D" uid="uid://dudlwt1eta37o" path="res://WarningSign_PixyFantasy/WarningSign03.png" id="5_rogsj"]
+[ext_resource type="Texture2D" uid="uid://fjsgrrxamwud" path="res://WarningSign_PixyFantasy/WarningSign04.png" id="6_a6u73"]
+[ext_resource type="Texture2D" uid="uid://cus2q6yvfg4yr" path="res://WarningSign_PixyFantasy/WarningSign05.png" id="7_pg6oa"]
+[ext_resource type="Texture2D" uid="uid://dq33vwlk1iglg" path="res://WarningSign_PixyFantasy/WarningSign06.png" id="8_i37o8"]
+[ext_resource type="Texture2D" uid="uid://strbeie0fe0q" path="res://WarningSign_PixyFantasy/WarningSign07.png" id="9_pjvtf"]
+[ext_resource type="Texture2D" uid="uid://chwq5eyfkpht8" path="res://WarningSign_PixyFantasy/WarningSign08.png" id="10_dqemr"]
+[ext_resource type="Texture2D" uid="uid://eypfugojki2a" path="res://WarningSign_PixyFantasy/WarningSign09.png" id="11_4ppmq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
-size = Vector2(200, 202)
+size = Vector2(100, 100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jum4h"]
-radius = 375.033
+radius = 209.538
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpjd2"]
-radius = 960.576
+radius = 374.534
 
 [sub_resource type="Animation" id="Animation_jum4h"]
 resource_name = "death"
@@ -49,6 +58,41 @@ _data = {
 &"death": SubResource("Animation_jum4h")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_fida2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_byk1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_12xoo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rogsj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a6u73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pg6oa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_i37o8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pjvtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dqemr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4ppmq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Sacrifice" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -56,10 +100,10 @@ motion_mode = 1
 script = ExtResource("1_50n5x")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_jum4h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_jum4h")
 
 [node name="Label" type="Label" parent="Sprite2D"]
@@ -71,9 +115,10 @@ offset_bottom = 23.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea"]
 shape = SubResource("CircleShape2D_jum4h")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="ChaseArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_hpjd2")
 
 [node name="Wander" type="Timer" parent="."]
@@ -83,5 +128,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_hpjd2")
 }
 
+[node name="ChasingSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -150)
+sprite_frames = SubResource("SpriteFrames_fida2")
+autoplay = "default"
+frame_progress = 0.914646
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
+[connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="timeout" from="Wander" to="." method="_on_wander_timeout"]
