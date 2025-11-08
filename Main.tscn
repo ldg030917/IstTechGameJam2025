@@ -13,4 +13,4 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="Sacrifice" parent="." instance=ExtResource("2_r0du0")]
-position = Vector2(291, 57)
+position = Vector2(403, -5)
