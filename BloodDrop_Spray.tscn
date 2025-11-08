@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxoqwj167gb0o"]
+
+[ext_resource type="PackedScene" uid="uid://eteqrj3qasnq" path="res://BloodSpray.tscn" id="1_cw1o5"]
+
+[node name="BloodDropSpray" type="Node2D"]
+
+[node name="BloodSpray" parent="." instance=ExtResource("1_cw1o5")]
+mode = 1
+amount = 2
+min_y_death = 100.0
+max_y_death = 120.0
+time_randomness = 0.3
