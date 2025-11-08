@@ -111,8 +111,8 @@ func hurt(damage: int):
 		
 	state = State.HURT
 	hp -= damage
-	#var blooddrop_burst_scene = blooddrop_burst.instantiate()
-	#add_child(blooddrop_burst_scene)
+	var blooddrop_burst_scene = blooddrop_burst.instantiate()
+	add_child(blooddrop_burst_scene)
 	
 	#print("hurt")
 	if hp <= 0:

@@ -15,7 +15,7 @@ func _ready():
 			if parent is Player:
 				linear_velocity += Vector2.RIGHT * (parent.ref_pos - parent.global_position) * 2
 			else:
-				linear_velocity += Vector2.RIGHT * parent.linear_velocity.x
+				linear_velocity += Vector2.RIGHT * parent.velocity.x
 	$Timer.timeout.connect(queue_free)
 	target_y_death = randf_range(global_position.y + min_y_death, global_position.y + max_y_death)
 
