@@ -4,5 +4,5 @@
 
 [node name="Sacrifice" instance=ExtResource("1_aeko1")]
 
-[node name="ChasingSprite" parent="." index="6"]
+[node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243

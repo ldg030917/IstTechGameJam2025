@@ -7,7 +7,7 @@ class_name Sacrifice
 
 @export var speed: float = 100
 @export var hp: float = 10
-@export var Dgg: float = 0.1 # Delta god gauge
+@export var dgg: float = 0.1 # Delta god gauge
 @export var attack: float = 1.2
 @export var type: Type = Type.HOSTILE
 
@@ -19,6 +19,7 @@ var wander_target_position = Vector2.ZERO
 
 # 1은 오른쪽 -1은 왼쪽
 var facing_left := true
+var player :Player = null
 
 enum Type { HOSTILE, NEUTRAL, FRIENDLY }
 enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
@@ -26,6 +27,15 @@ enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
 func _ready() -> void:
 	state = State.IDLE
 	_on_idle_action_timer_timeout()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("devote") and player != null:
+		player.get_heart(dgg)
+		print("Get heart")
+		if facing_left:
+			animation_sprite.play("heartpop_L")
+		else:
+			animation_sprite.play("heartpop_R")
 
 func _physics_process(delta: float) -> void:
 	$Label.text = str(state)
@@ -41,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		_:
 			velocity = Vector2.ZERO
 			
-	facing_left = true if velocity.x < 0 else false
+	facing_left = true if velocity.x < 0 else (facing_left if velocity.x == 0 else false)
 		
 	move_and_slide()
 
@@ -130,3 +140,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		state = State.CHASE
 		if type == Type.FRIENDLY:
 			state = State.IDLE
+
+
+
+func _on_heart_pop_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player = body
+		
+
+
+func _on_heart_pop_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player = null

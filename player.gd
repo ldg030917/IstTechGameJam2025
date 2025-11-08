@@ -9,7 +9,7 @@ var speed_0:float
 var hp:float
 var speed:float
 var atk:float
-var inventory
+var inventory: Array
 var direction
 
 var orientation
@@ -80,10 +80,14 @@ func devote():
 	if len(inventory) == 0 : return 
 	speed = 0
 	state = STATE.devoting
-	
+
+func get_heart(dgg):
+	if inventory.size() >= 3:
+		return
+	inventory.append(dgg)
 
 func _physics_process(dt: float) -> void:
-	print(Global.god_gauge)
+	#print(Global.god_gauge)
 	z_index = global_position.y
 	
 	if orientation == "left" : $Node2D.scale.x = -1

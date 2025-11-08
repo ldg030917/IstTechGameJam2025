@@ -4,8 +4,11 @@
 
 [node name="Sacrifice" instance=ExtResource("1_reef3")]
 
-[node name="ChasingSprite" parent="." index="6"]
+[node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
 
-[node name="AnimatedSprite2D" parent="." index="7"]
-animation = &""
+[node name="AnimatedSprite2D" parent="." index="5"]
+animation = &"heartpop_L"
+
+[connection signal="body_entered" from="HeartPopArea" to="." method="_on_heart_pop_area_body_entered"]
+[connection signal="body_exited" from="HeartPopArea" to="." method="_on_heart_pop_area_body_exited"]

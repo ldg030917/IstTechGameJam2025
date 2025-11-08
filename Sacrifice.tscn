@@ -101,6 +101,7 @@ offset_bottom = 69.0
 label_settings = SubResource("LabelSettings_12xoo")
 
 [node name="HeartPopArea" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartPopArea"]
 shape = SubResource("CircleShape2D_jum4h")
