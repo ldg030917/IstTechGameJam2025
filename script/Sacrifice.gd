@@ -137,6 +137,7 @@ func hurt(damage: int, subject_pos: Vector2):
 		state = State.DEAD
 		$SightArea/CollisionShape2D.disabled = true
 		$ChaseArea/CollisionShape2D.disabled = true
+		$AttackArea/CollisionShape2D.disabled = true
 		$HeartPopArea/CollisionShape2D.disabled = false
 		chasing_sprite.hide()
 		#animation_sprite.modulate = Color.AQUA
@@ -185,6 +186,9 @@ func _on_heart_pop_area_body_exited(body: Node2D) -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	if state == State.DEAD:
+		return
+	#if state == State.CHASE:
 	if body is Player:
 		body.hurt(attack, position)
 		state = State.ATTACK
