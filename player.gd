@@ -96,6 +96,6 @@ func _physics_process(dt: float) -> void:
 		pass
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right": 
+	if animated_sprite.animation == "attack": 
 		state = STATE.default
 		speed = speed_0

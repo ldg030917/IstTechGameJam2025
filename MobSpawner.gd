@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var cow_scene: Array[PackedScene]
+@export var mob_scenes: Array[PackedScene]
 @export var max_mob_count := 20
 
 @export_group("Spawn Distance")
@@ -10,14 +10,16 @@ extends Node2D
 @export_group("Spawn Attempts")
 @export var spawn_attempts_per_tick: int = 10 # 타이머 틱당 스폰 시도 횟수
 
+# 새로 스폰될 몹이 차지할 공간의 최소 반경
+@export var spawn_clearance_radius: float = 32.0 
+
 # --- 내부 변수 ---
 @onready var spawn_timer = $Timer
-var player: Player
+@export var player: Player
 var current_mob_count := 0
 
 func _ready() -> void:
-	#player = get_tree()
-	pass
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 func on_mob_died():
 	current_mob_count -= 1
@@ -33,7 +35,6 @@ func _on_spawn_timer_timeout():
 			# 3. 검사를 통과하면 몹을 스폰하고 반복 종료
 			spawn_mob(spawn_position)
 			break # 이번 틱에서는 한 마리만 스폰
-#TODO:개발
 
 # 1. 랜덤 스폰 위치 후보 생성
 func get_random_spawn_position() -> Vector2:
@@ -45,12 +46,29 @@ func get_random_spawn_position() -> Vector2:
 func is_valid_spawn_location(position: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	
-	var parameters = PhysicsPointQueryParameters2D.new()
+	var shape = CircleShape2D.new()
+	shape.radius = spawn_clearance_radius
 	
-	parameters.position = position
-	parameters.collision_mask = null
-	return true
-	pass
+	var parameters = PhysicsShapeQueryParameters2D.new()
+	parameters.shape = shape
+	parameters.transform = Transform2D(0, position)
+	
+	parameters.collision_mask = 0b00000001
+	
+	var result = space_state.intersect_shape(parameters)
+	
+	return result.is_empty()
 
-func spawn_mob(a):
-	pass
+func spawn_mob(position: Vector2):
+	if mob_scenes.is_empty():
+		return
+	
+	var random_mob_scene = mob_scenes.pick_random()
+	var new_mob = random_mob_scene.instantiate()
+	
+	new_mob.tree_exiting.connect(on_mob_died)
+	
+	new_mob.global_position = position
+	get_parent().add_child(new_mob)
+	current_mob_count += 1
+	#print("spawn")
