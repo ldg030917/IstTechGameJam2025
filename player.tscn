@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c6sc66ex35uf7"]
+[gd_scene load_steps=47 format=3 uid="uid://c6sc66ex35uf7"]
 
 [ext_resource type="Script" uid="uid://0e361ph7pucw" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://c3sipnjldq0qt" path="res://ani/attack_L/1.png" id="2_j5n4i"]
@@ -198,6 +198,54 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(47, 74.5)
 
+[sub_resource type="Animation" id="Animation_331ug"]
+resource_name = "attack_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"attack_right", &"attack_right"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, 0), Vector2(20, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ny14h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ibah8"]
+_data = {
+&"RESET": SubResource("Animation_ny14h"),
+&"attack_right": SubResource("Animation_331ug")
+}
+
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_4flbx")
@@ -206,6 +254,7 @@ script = ExtResource("1_4flbx")
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(20, 0)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_1xqrm")
 animation = &"attack_right"
@@ -221,4 +270,12 @@ collision_mask = 2
 position = Vector2(23.5, 0)
 shape = SubResource("RectangleShape2D_onrkg")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ibah8")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
