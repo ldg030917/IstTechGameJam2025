@@ -4,6 +4,7 @@ class_name Sacrifice
 
 @onready var idle_action_timer = $IdleActionTimer
 @onready var animation_sprite = $AnimatedSprite2D
+@onready var chasing_sprite = $ChasingSprite
 var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 
 @export var speed: float = 100
@@ -61,7 +62,7 @@ func _physics_process(delta: float) -> void:
 func idle_state_logic(delta):
 	if is_wandering:
 		var direction = (wander_target_position - global_position).normalized()
-		velocity = velocity.move_toward(direction * speed, 20 * delta)
+		velocity = velocity.lerp(direction * speed, 0.1)
 		if facing_left:
 			animation_sprite.play("move_L")
 		else:
@@ -70,6 +71,7 @@ func idle_state_logic(delta):
 			is_wandering = false
 			velocity = Vector2.ZERO
 	else:
+		velocity = Vector2.ZERO
 		if facing_left:
 			animation_sprite.play("idle_L")
 		else:
@@ -77,7 +79,8 @@ func idle_state_logic(delta):
 
 func chase_state_logic():
 	var direction = global_position.direction_to(target.global_position)
-	velocity = direction * speed
+	var target_velocity = direction * speed
+	velocity = velocity.lerp(target_velocity, 0.1)
 
 func attack_state_logic(delta):
 	
@@ -98,19 +101,22 @@ func _on_sight_area_body_entered(body: Node2D) -> void:
 		if type == Type.NEUTRAL:
 			return
 		state = State.CHASE
-		$ChasingSprite.show()
+		chasing_sprite.show()
 
 func _on_chase_area_body_exited(body: Node2D) -> void:
 	if body is Player and state != State.DEAD:
 		state = State.IDLE
-		$ChasingSprite.hide()
+		is_wandering = false
+		chasing_sprite.hide()
 
-func hurt(damage: int):
+func hurt(damage: int, subject_pos: Vector2):
 	if state == State.DEAD:
 		return
 		
 	state = State.HURT
 	hp -= damage
+	var dr_hat = (position - subject_pos).normalized()
+	velocity += dr_hat * 100
 	var blooddrop_burst_scene = blooddrop_burst.instantiate()
 	add_child(blooddrop_burst_scene)
 	
@@ -120,8 +126,9 @@ func hurt(damage: int):
 		$SightArea/CollisionShape2D.disabled = true
 		$ChaseArea/CollisionShape2D.disabled = true
 		$HeartPopArea/CollisionShape2D.disabled = false
-		$ChasingSprite.hide()
-		animation_sprite.modulate = Color.AQUA
+		chasing_sprite.hide()
+		#animation_sprite.modulate = Color.AQUA
+		animation_sprite.position.y += 20
 		if facing_left:
 			animation_sprite.play("dead_L")
 		else:
@@ -152,7 +159,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_heart_pop_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player = body
-		animation_sprite.modulate = Color.RED
+		#animation_sprite.modulate = Color.RED
 		
 
 

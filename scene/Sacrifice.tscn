@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=9 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://script/Sacrifice.gd" id="1_50n5x"]
 [ext_resource type="SpriteFrames" uid="uid://bngg8t4yoroou" path="res://scene/basic_sprite_frames.tres" id="12_12xoo"]
@@ -6,8 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
 size = Vector2(100, 100)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jum4h"]
-radius = 209.538
+[sub_resource type="CircleShape2D" id="CircleShape2D_51u1b"]
+radius = 284.044
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpjd2"]
 radius = 374.534
@@ -51,6 +51,9 @@ animations = [{
 font_size = 50
 font_color = Color(0, 0, 1, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jum4h"]
+radius = 160.378
+
 [node name="Sacrifice" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -63,7 +66,7 @@ shape = SubResource("RectangleShape2D_jum4h")
 [node name="SightArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea"]
-shape = SubResource("CircleShape2D_jum4h")
+shape = SubResource("CircleShape2D_51u1b")
 
 [node name="ChaseArea" type="Area2D" parent="."]
 
