@@ -1,20 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3v557u28b3as"]
+[gd_scene load_steps=8 format=3 uid="uid://b3v557u28b3as"]
 
 [ext_resource type="Script" uid="uid://b6nvsqc60p82" path="res://script/Altar.gd" id="1_x4gke"]
-[ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="2_p32ed"]
+[ext_resource type="Texture2D" uid="uid://cmwd3eusruaq1" path="res://asset/alter.png" id="2_l7erw"]
+[ext_resource type="Texture2D" uid="uid://dsj8iikfc7x2d" path="res://asset/ani/heart_poping/심장.png" id="3_lasvr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7erw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7erw"]
+size = Vector2(180, 70)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4gke"]
-size = Vector2(800, 400)
+size = Vector2(150, 130)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x4gke"]
 font_size = 24
 font_color = Color(0, 0, 0, 1)
 
-[node name="Altar" type="Node2D"]
+[node name="Altar" type="StaticBody2D"]
+collision_layer = 32
+physics_material_override = SubResource("PhysicsMaterial_l7erw")
 script = ExtResource("1_x4gke")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -35)
+shape = SubResource("RectangleShape2D_l7erw")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_p32ed")
+position = Vector2(5, -30)
+texture = ExtResource("2_l7erw")
 
 [node name="InteractArea" type="Area2D" parent="."]
 
@@ -24,9 +37,9 @@ shape = SubResource("RectangleShape2D_x4gke")
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 offset_left = -22.0
-offset_top = -123.0
+offset_top = -200.0
 offset_right = 18.0
-offset_bottom = -83.0
+offset_bottom = -160.0
 
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 1
@@ -44,6 +57,31 @@ grow_vertical = 2
 text = "E"
 label_settings = SubResource("LabelSettings_x4gke")
 horizontal_alignment = 1
+
+[node name="Heart1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -93)
+rotation = -0.468877
+texture = ExtResource("3_lasvr")
+region_enabled = true
+region_rect = Rect2(179, 199.5, 46, 52)
+
+[node name="Heart2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-19, -88)
+rotation = -0.338459
+texture = ExtResource("3_lasvr")
+region_enabled = true
+region_rect = Rect2(179, 199.5, 46, 52)
+
+[node name="Heart3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, -92)
+rotation = 1.72938
+scale = Vector2(1, 1)
+texture = ExtResource("3_lasvr")
+region_enabled = true
+region_rect = Rect2(179, 199.5, 46, 52)
 
 [connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

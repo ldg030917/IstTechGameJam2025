@@ -49,17 +49,16 @@ func _physics_process(delta: float) -> void:
 	match state:
 		State.IDLE:
 			idle_state_logic(delta)
-			pass
+			facing_left = true if velocity.x < 0 else (facing_left if velocity.x == 0 else false)
 		State.CHASE:
 			chase_state_logic(delta)
+			facing_left = true if velocity.x < 0 else (facing_left if velocity.x == 0 else false)
 		State.ATTACK:
 			attack_state_logic(delta)
 		State.HURT:
 			hurt_state_logic()
 		_:
 			velocity = Vector2.ZERO
-			
-	facing_left = true if velocity.x < 0 else (facing_left if velocity.x == 0 else false)
 		
 	move_and_slide()
 

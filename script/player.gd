@@ -81,16 +81,21 @@ func _set_ref_pos(dt:float):
 
 func _goto_ref_pos(dt:float):
 	const k = 5.0
-	position += k*(ref_pos - position)*dt
-	
+	#position += k*(ref_pos - position)*dt
+	var collision = move_and_collide(k*(ref_pos - position)*dt)
+	if collision:
+		ref_pos = position
+
+
 func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 	
-func devote():
-	if len(inventory) == 0 : return 
+func devote() -> Array:
+	if len(inventory) == 0 : return []
 	speed = 0
 	state = STATE.devoting
-
+	return inventory
+	
 func get_heart(dgg):
 	if inventory.size() >= 3:
 		return
@@ -100,7 +105,7 @@ func get_heart(dgg):
 
 func _physics_process(dt: float) -> void:
 	#print(Global.god_gauge)
-	z_index = global_position.y
+	z_index = global_position.y + 40
 	
 	if orientation == "left" : $Node2D.scale.x = -1
 	elif orientation == "right" : $Node2D.scale.x = 1
@@ -109,6 +114,9 @@ func _physics_process(dt: float) -> void:
 		$AnimatedSprite2D.position = Vector2.ZERO
 		
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
+		#var direction = Input.get_vector("left", "right", "up", "down").normalized()
+		#var target_velocity = direction * speed
+		#velocity = velocity.ler
 		_set_ref_pos(dt)
 		_goto_ref_pos(dt)
 		

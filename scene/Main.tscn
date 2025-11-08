@@ -19,10 +19,13 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="Altar" parent="." instance=ExtResource("3_r0du0")]
-position = Vector2(123, 867)
+position = Vector2(0, -300)
+collision_layer = 1
 
 [node name="MobSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_cm0pq")]
 mob_scenes = Array[PackedScene]([ExtResource("5_trn2v"), ExtResource("6_03owx"), ExtResource("7_wkp8b"), ExtResource("8_20pc6")])
+max_mob_count = 30
+spawn_attempts_per_tick = 15
 player = NodePath("../player")
 
 [node name="Sacrifice" parent="." instance=ExtResource("5_trn2v")]

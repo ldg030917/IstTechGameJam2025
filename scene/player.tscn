@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://c6sc66ex35uf7"]
+[gd_scene load_steps=76 format=3 uid="uid://c6sc66ex35uf7"]
 
 [ext_resource type="Script" uid="uid://0e361ph7pucw" path="res://script/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dg6hfuk8140vk" path="res://asset/circle-512.png" id="2_76oay"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dpxe7omgme3ng" path="res://asset/ani/attack_R/5.png" id="14_ymct0"]
 [ext_resource type="Texture2D" uid="uid://fi3khw7y5dyg" path="res://asset/ani/attack_R/6.png" id="15_4hm66"]
 [ext_resource type="Texture2D" uid="uid://7iyrx4pyadkr" path="res://asset/ani/attack_R/7.png" id="16_rf2qa"]
-[ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="17_b4uyv"]
 [ext_resource type="Texture2D" uid="uid://rmceua675ea5" path="res://asset/ani/heart_poping/1.png" id="18_3mmt4"]
 [ext_resource type="Texture2D" uid="uid://dxr8sc516c04f" path="res://asset/ani/hurt_L/1.png" id="18_ko5ao"]
 [ext_resource type="Texture2D" uid="uid://cavlrj1ytq31v" path="res://asset/ani/heart_poping/2.png" id="19_8pv5j"]
@@ -130,11 +129,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("17_b4uyv")
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_4d8ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_dm46t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_4gwaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_frgke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_5kjuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ryyvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_odra3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_x5omm")
 }],
 "loop": false,
 "name": &"devoting",
-"speed": 1.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -184,10 +210,31 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5n4ea")
 }],
 "loop": false,
 "name": &"heart_poping",
-"speed": 14.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -357,7 +404,9 @@ texture = ExtResource("2_76oay")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_1xqrm")
-animation = &"heart_poping"
+animation = &"devoting"
+frame = 9
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 26)
