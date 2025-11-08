@@ -8,6 +8,7 @@
 
 [node name="player" parent="." instance=ExtResource("1_uu6xs")]
 position = Vector2(39, 55)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position_smoothing_enabled = true
