@@ -45,7 +45,6 @@ func be_attacked(delta_hp:float):
 	
 func attack():
 	state = STATE.attacking
-	
 	speed = 0
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
@@ -72,7 +71,10 @@ func _ready() -> void:
 	reset(100, 500, 1, Vector2.ZERO)
 
 func _physics_process(dt: float) -> void:
+	z_index = global_position.y
+	
 	if state == STATE.default:
+		$AnimatedSprite2D.position = Vector2.ZERO
 		if Input.is_action_just_pressed("attack"): attack()
 		_set_ref_pos(dt)
 		_goto_ref_pos(dt)
@@ -89,13 +91,19 @@ func _physics_process(dt: float) -> void:
 		else: animated_sprite.play("idle_" + orientation)
 		
 	elif  state == STATE.attacking:
+		$AnimatedSprite2D.position = 20 * _convert_orientation_to_num(orientation) * Vector2.RIGHT
 		animated_sprite.play("attack_" + orientation)
+		
 	elif  state == STATE.being_attacked:
 		pass
 	elif state == STATE.devoting:
 		pass
+		
+func _convert_orientation_to_num(_orientation):
+	if _orientation == "left" : return -1
+	elif _orientation == "right" : return 1
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == "attack": 
+	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right":
 		state = STATE.default
 		speed = speed_0
