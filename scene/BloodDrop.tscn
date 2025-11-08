@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn1gw0jik7xmp"]
 
-[ext_resource type="Script" path="res://BloodDrop.gd" id="1_b1fiq"]
+[ext_resource type="Script" uid="uid://cntpphlkejtns" path="res://script/BloodDrop.gd" id="1_b1fiq"]
 [ext_resource type="PackedScene" uid="uid://cwtvbpmnhc2si" path="res://scene/BloodPuddle.tscn" id="2_e827v"]
 [ext_resource type="Texture2D" uid="uid://kmbe01urtp4m" path="res://asset/blood.png" id="2_jltst"]
 

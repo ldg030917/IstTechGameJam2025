@@ -1,4 +1,5 @@
 extends Node2D
+var blood_drop_scene  = load("res://scene/BloodDrop.tscn")
 
 enum Mode { ONE_SHOT, CONTINUOUS }
 @export var mode : Mode = Mode.ONE_SHOT
@@ -9,7 +10,6 @@ enum Mode { ONE_SHOT, CONTINUOUS }
 @export var speed_max : float = 300.0
 @export var base_direction_degrees : float = -90.0
 @export var spread_degrees : float = 180.0
-@export var blood_drop_scene : PackedScene
 @export var min_y_death : float = 150.0
 @export var max_y_death : float = 250.0
 @export var time_randomness : float = 0.5
@@ -19,6 +19,7 @@ var time_active : float = 0.0
 var emission_timer : float = 0.0
 
 func _ready():
+	get_parent().wrap()
 	if mode == Mode.ONE_SHOT:
 		fire()
 

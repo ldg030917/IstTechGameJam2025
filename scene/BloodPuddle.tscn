@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwtvbpmnhc2si"]
 
-[ext_resource type="Script" path="res://blood_puddle.gd" id="1_s5f1m"]
+[ext_resource type="Script" uid="uid://se4jls5rwm5r" path="res://script/blood_puddle.gd" id="1_s5f1m"]
 [ext_resource type="Texture2D" uid="uid://rx1lt7366div" path="res://asset/puddle.png" id="1_tamr3"]
 
 [node name="BloodPuddle" type="Node2D"]

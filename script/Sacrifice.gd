@@ -4,7 +4,7 @@ class_name Sacrifice
 
 @onready var idle_action_timer = $IdleActionTimer
 @onready var animation_sprite = $AnimatedSprite2D
-var blooddrop_burst = load("res://BloodDrop_Burst.tscn")
+var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 
 @export var speed: float = 100
 @export var hp: float = 10
