@@ -41,6 +41,7 @@ func _input(event: InputEvent) -> void:
 		player = null
 		is_heartpop = true
 		print("Get heart")
+		get_tree().root.set_input_as_handled()
 		if facing_left:
 			animation_sprite.play("heartpop_L")
 		else:

@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4vsy48i62d6f"]
+[gd_scene load_steps=4 format=3 uid="uid://c4vsy48i62d6f"]
 
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://scene/Sacrifice.tscn" id="1_aeko1"]
 [ext_resource type="SpriteFrames" uid="uid://b0auwf8uhe4bm" path="res://scene/heretic_sprite_frames.tres" id="2_h385e"]
 
-[node name="Sacrifice" instance=ExtResource("1_aeko1")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h385e"]
+size = Vector2(100, 160)
+
+[node name="Sacrifice2" instance=ExtResource("1_aeko1")]
 speed = 200.0
 chase_speed = 200.0
+
+[node name="Hurtbox" parent="." index="0"]
+position = Vector2(-10, 31)
+shape = SubResource("RectangleShape2D_h385e")
 
 [node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
