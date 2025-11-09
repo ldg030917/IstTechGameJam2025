@@ -16,6 +16,7 @@ extends Node2D
 # --- 내부 변수 ---
 @onready var spawn_timer = $Timer
 @export var player: Player
+var current_mobs: Array[Sacrifice]
 var current_mob_count := 0
 
 func _ready() -> void:
@@ -35,6 +36,8 @@ func _on_spawn_timer_timeout():
 			# 3. 검사를 통과하면 몹을 스폰하고 반복 종료
 			spawn_mob(spawn_position)
 			break # 이번 틱에서는 한 마리만 스폰
+	
+	despawn_mob()
 
 # 1. 랜덤 스폰 위치 후보 생성
 func get_random_spawn_position() -> Vector2:
@@ -69,6 +72,15 @@ func spawn_mob(position: Vector2):
 	new_mob.tree_exiting.connect(on_mob_died)
 	
 	new_mob.global_position = position
+	new_mob.player = player
 	get_parent().add_child(new_mob)
 	current_mob_count += 1
+	current_mobs.append(new_mob)
 	#print("spawn")
+
+func despawn_mob():
+	for mob in current_mobs:
+		if player.position.distance_to(mob.position) > 2000:
+			print("despawn")
+			current_mobs.erase(mob)
+			mob.queue_free()

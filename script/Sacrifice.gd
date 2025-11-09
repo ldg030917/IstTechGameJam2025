@@ -41,8 +41,6 @@ func _ready() -> void:
 		$AttackArea/CollisionShape2D.disabled = true
 	Global.rage_mode_activated.connect(_on_rage_mode_activated)
 	Global.rage_mode_deactivated.connect(_on_rage_mode_deactivated)
-	if Global.is_rage():
-		rage()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("devote") and player != null and !is_heartpop:
@@ -161,7 +159,6 @@ func hurt(damage: int, subject_pos: Vector2) -> bool:
 	
 	#print("hurt")
 	if hp <= 0:
-		unrage()
 		state = State.DEAD
 		$SightArea/CollisionShape2D.disabled = true
 		$ChaseArea/CollisionShape2D.disabled = true
@@ -235,17 +232,12 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		state = State.ATTACK
 
 func _on_rage_mode_activated():
-	rage()
-
-func _on_rage_mode_deactivated():
-	unrage()
-
-func rage():
+	print("gotit")
 	rage_effect.visible = true
 	speed *= 1.5
 	chase_speed *= 1.5
 
-func unrage():
+func _on_rage_mode_deactivated():
 	rage_effect.visible = false
 	speed *= 0.66
 	chase_speed *= 0.66
