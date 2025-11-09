@@ -6,3 +6,6 @@
 
 [node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
+
+[node name="AnimatedSprite2D" parent="." index="5"]
+animation = &"move_R"

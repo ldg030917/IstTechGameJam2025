@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=47 format=3 uid="uid://b0auwf8uhe4bm"]
+[gd_resource type="SpriteFrames" load_steps=50 format=3 uid="uid://b0auwf8uhe4bm"]
 
 [ext_resource type="Texture2D" uid="uid://dp5n2ejfok5dy" path="res://asset/ani/heretic/attack_L/1.png" id="1_50imx"]
 [ext_resource type="Texture2D" uid="uid://bvsqxn6f3ir2m" path="res://asset/ani/heretic/attack_L/2.png" id="2_26dm3"]
@@ -12,10 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://drkfhv8qnemxl" path="res://asset/ani/heretic/attack_R/4.png" id="10_ranch"]
 [ext_resource type="Texture2D" uid="uid://djnyfqkfhvcdv" path="res://asset/ani/heretic/attack_R/5.png" id="11_jlfj4"]
 [ext_resource type="Texture2D" uid="uid://pj1lhrmk0hoo" path="res://asset/ani/heretic/attack_R/6.png" id="12_wwdnb"]
-[ext_resource type="Texture2D" uid="uid://cwruacx4qsfqs" path="res://asset/test_npc_1.png" id="13_pkbrn"]
+[ext_resource type="Texture2D" uid="uid://c4ga4n03x8cxm" path="res://asset/ani/heretic/소작농(이교도) 시체/소작농(이교도) 왼 시체.png" id="13_op0w3"]
 [ext_resource type="Texture2D" uid="uid://cj5qh35fjhh0i" path="res://asset/ani/heretic/hurt_L/1.png" id="14_lp0w3"]
+[ext_resource type="Texture2D" uid="uid://daqoh720uc7nx" path="res://asset/ani/heretic/소작농(이교도) 시체/소작농(이교도) 오 시체.png" id="14_tu74h"]
 [ext_resource type="Texture2D" uid="uid://b7u214l158hv5" path="res://asset/ani/heretic/hurt_L/2.png" id="15_ltbg7"]
+[ext_resource type="Texture2D" uid="uid://b2vuwgfciaox" path="res://asset/ani/heretic/소작농(이교도) 시체/소작농(이교도) 시체 피 O 좌.png" id="15_tu74h"]
 [ext_resource type="Texture2D" uid="uid://cji7u43rerry1" path="res://asset/ani/heretic/hurt_L/3.png" id="16_gbpty"]
+[ext_resource type="Texture2D" uid="uid://bddpncu2k220p" path="res://asset/ani/heretic/소작농(이교도) 시체/소작농(이교도) 시체 피 O 우.png" id="16_ot2e6"]
 [ext_resource type="Texture2D" uid="uid://cqyvdlospg4hr" path="res://asset/ani/heretic/hurt_L/4.png" id="17_f1jcf"]
 [ext_resource type="Texture2D" uid="uid://ds6ocv3mp24cr" path="res://asset/ani/heretic/hurt_L/5.png" id="18_jqk7x"]
 [ext_resource type="Texture2D" uid="uid://c6xnn2hgwpygf" path="res://asset/ani/heretic/hurt_R/1.png" id="19_hjhpm"]
@@ -97,7 +100,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_pkbrn")
+"texture": ExtResource("13_op0w3")
 }],
 "loop": false,
 "name": &"dead_L",
@@ -105,7 +108,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_pkbrn")
+"texture": ExtResource("14_tu74h")
 }],
 "loop": false,
 "name": &"dead_R",
@@ -113,7 +116,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_pkbrn")
+"texture": ExtResource("15_tu74h")
 }],
 "loop": false,
 "name": &"heartpop_L",
@@ -121,7 +124,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_pkbrn")
+"texture": ExtResource("16_ot2e6")
 }],
 "loop": false,
 "name": &"heartpop_R",
