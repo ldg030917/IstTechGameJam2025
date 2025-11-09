@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbeotob35sset"
-path="res://.godot/imported/6.png-f98909a57e8f267f8dcbd344571b5dfd.ctex"
+path="res://.godot/imported/6.png-c38a924115a0c791e2f7219a9cb3c344.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ani/Fanatic/신도 왼 정지/6.png"
-dest_files=["res://.godot/imported/6.png-f98909a57e8f267f8dcbd344571b5dfd.ctex"]
+source_file="res://asset/ani/fanatic/신도 왼 정지/6.png"
+dest_files=["res://.godot/imported/6.png-c38a924115a0c791e2f7219a9cb3c344.ctex"]
 
 [params]
 

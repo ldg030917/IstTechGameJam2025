@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://scene/Sheep.tscn" id="6_03owx"]
 [ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://scene/Fanatic.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://scene/Heretic.tscn" id="8_20pc6"]
-[ext_resource type="PackedScene" uid="uid://dbi4ickyxfb4y" path="res://scene/HUD.tscn" id="8_eik88"]
+[ext_resource type="PackedScene" path="res://scene/HUD.tscn" id="8_eik88"]
 
 [node name="Main" type="Node2D"]
 
@@ -34,6 +34,5 @@ player = NodePath("../player")
 position = Vector2(573, 163)
 speed = 180.0
 chase_speed = 700.0
-dgg = 10.0
 
 [node name="Control" parent="." instance=ExtResource("8_eik88")]
