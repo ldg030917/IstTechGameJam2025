@@ -10,11 +10,14 @@ hp = 5.0
 attack = 0.5
 type = 1
 
-[node name="IdleActionTimer" parent="." index="3"]
+[node name="cow" type="Node2D" parent="." index="0"]
+position = Vector2(3, 1)
+
+[node name="IdleActionTimer" parent="." index="4"]
 wait_time = 3.0
 
-[node name="ChasingSprite" parent="." index="4"]
+[node name="ChasingSprite" parent="." index="5"]
 frame_progress = 0.882243
 
-[node name="AnimatedSprite2D" parent="." index="5"]
+[node name="AnimatedSprite2D" parent="." index="6"]
 sprite_frames = ExtResource("2_2quor")
