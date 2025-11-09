@@ -6,6 +6,7 @@ const inventory_size:int = 3
 
 var speed_0:float
 
+var hp: float
 var speed:float
 var atk:float
 var inventory: Array
@@ -35,24 +36,9 @@ signal devoted(inventory: Array[float])
 @onready var attack_area = $Node2D/AttackArea
 @onready var animated_sprite = $AnimatedSprite2D
 
-@onready var attack_sound = load("res://asset/audio/player_atk.mp3")
+@onready var attack_sound = load("res://asset/audio/swing.mp3")
 @onready var penetrate_sound = load("res://asset/audio/penetrated.mp3")
 @onready var heart_poping_sound = load("res://asset/audio/heart_pop.mp3")
-
-var hp: float:
-	set(value):
-		hp = clamp(value, 0, max_hp)
-		
-		# 3. 체력바의 값을 *직접* 업데이트합니다.
-		if hp_bar: # 노드가 준비되었는지 확인
-			hp_bar.value = hp
-			print(hp_bar.value)
-		
-		# 4. 다른 시스템(예: 메인 HUD)을 위해 시그널도 방출합니다.
-		hp_changed.emit(hp)
-	
-	get:
-		return hp
 
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	speed_0 = _speed
@@ -72,21 +58,21 @@ func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	hp = max_hp # (set 함수가 호출되며 3, 4번이 실행됩니다)
 	
 func hurt(delta_hp:float, subject_pos:Vector2):
-	if state == STATE.hurt : return
 	
+	if state == STATE.hurt : return
 	state = STATE.hurt
 	hp -= delta_hp
 	var dr_hat = (position - subject_pos).normalized()
 	ref_pos = position + 100 * dr_hat
 	if dr_hat.dot(Vector2.RIGHT) > 0 : orientation = "left"
 	elif dr_hat.dot(Vector2.RIGHT) < 0: orientation = "right"
-	#여기에 피격시 발생할 일들 추가
+	
 	
 func attack():
 	state = STATE.attacking
 	speed = 0
 	
-	Global.make_sound(attack_sound,global_position, -0.5, 0.31)
+	Global.make_sound(attack_sound,global_position, 13.0)
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	#print(overlapping_bodies)
@@ -128,6 +114,8 @@ func get_heart(dgg):
 	state = STATE.poping
 	speed = 0
 	Global.make_sound(heart_poping_sound, global_position, 0.0)
+
+	
 
 func _physics_process(dt: float) -> void:
 	#print(Global.god_gauge)
@@ -178,6 +166,8 @@ func _physics_process(dt: float) -> void:
 	elif state == STATE.poping:
 		animated_sprite.play("heart_poping")
 		
+	if hp >= max_hp: hp = max_hp
+	
 func _convert_orientation_to_num(_orientation):
 	if _orientation == "left" : return -1
 	elif _orientation == "right" : return 1
