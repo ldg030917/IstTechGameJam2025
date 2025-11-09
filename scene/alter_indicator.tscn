@@ -1,8 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2tgoonubhv6u"]
 
-[ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="1_7t21n"]
-[ext_resource type="Script" uid="uid://gqmwixwq10g0" path="res://script/alter_indicator.gd" id="1_crosb"]
+[ext_resource type="Script" uid="uid://birmxiytwjx3e" path="res://script/alter_indicator.gd" id="1_crosb"]
+[ext_resource type="Texture2D" uid="uid://dr0dgly66485g" path="res://asset/arrow.png" id="1_utjov"]
 
 [node name="AlterIndicator" type="Sprite2D"]
-texture = ExtResource("1_7t21n")
+position = Vector2(0, 50)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_utjov")
 script = ExtResource("1_crosb")
