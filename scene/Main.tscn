@@ -43,7 +43,8 @@ max_spawn_radius = 1500.0
 spawn_attempts_per_tick = 15
 player = NodePath("../player")
 
-[node name="CameraEffect" parent="." instance=ExtResource("9_pnqar")]
+[node name="CameraEffect" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_pnqar")]
+player = NodePath("../player")
 
 [node name="Control" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_eik88")]
 player = NodePath("../player")

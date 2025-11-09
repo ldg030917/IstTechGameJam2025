@@ -18,6 +18,12 @@ var orientation
 
 var ref_pos:Vector2 = Vector2.ZERO
 
+var bgm:Array = [
+	load("res://asset/audio/ost1.mp3"),
+	load("res://asset/audio/ost2.mp3"),
+	load("res://asset/audio/ost3.mp3"),
+]
+
 enum STATE {
 	default,
 	attacking,
@@ -138,6 +144,8 @@ func get_heart(dgg):
 	
 
 func _physics_process(dt: float) -> void:
+	
+	
 	#print(Global.god_gauge)
 	z_index = global_position.y + 40
 	
