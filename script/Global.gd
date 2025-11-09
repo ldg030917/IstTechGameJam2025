@@ -19,6 +19,9 @@ func _process(delta: float) -> void:
 	god_gauge -= delta * a
 	check_cond()
 
+func is_rage():
+	return god_gauge <= rage_threshold
+
 func check_cond():
 	if god_gauge <= rage_threshold and not rage_mode_active:
 		rage_mode_active = true
