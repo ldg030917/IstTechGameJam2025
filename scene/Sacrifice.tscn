@@ -108,6 +108,8 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("RectangleShape2D_51u1b")
 
+[node name="walking_sound" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="timeout" from="IdleActionTimer" to="." method="_on_idle_action_timer_timeout"]

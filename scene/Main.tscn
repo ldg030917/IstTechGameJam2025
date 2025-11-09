@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckjnnxfqliahl"]
+[gd_scene load_steps=11 format=3 uid="uid://ckjnnxfqliahl"]
 
+[ext_resource type="PackedScene" path="res://scene/background.tscn" id="1_3sxgj"]
 [ext_resource type="PackedScene" uid="uid://c6sc66ex35uf7" path="res://scene/player.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://b3v557u28b3as" path="res://scene/Altar.tscn" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://f75gbexwqgtt" path="res://scene/MobSpawner.tscn" id="4_cm0pq"]
@@ -12,6 +13,9 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="Background" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("1_3sxgj")]
+player_node = NodePath("../player")
+
 [node name="player" parent="." instance=ExtResource("1_uu6xs")]
 position = Vector2(39, 55)
 scale = Vector2(2, 2)
@@ -21,6 +25,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="Altar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_r0du0")]
+modulate = Color(0.730216, 0.730216, 0.730216, 1)
 position = Vector2(0, -300)
 collision_layer = 1
 player = NodePath("../player")
