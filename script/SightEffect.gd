@@ -7,7 +7,7 @@ extends CanvasLayer
 @export var change_step : float = 0.1
 	
 func _physics_process(delta: float) -> void:
-	make_darker(0.1 * (Global.max_gg - Global.god_gauge)/Global.max_gg)
+	make_darker((Global.god_gauge/Global.max_gg)**2)
 	
 func make_darker(_r:float):
 	var current_radius = sight.material.get_shader_parameter("radius")

@@ -35,4 +35,7 @@ player = NodePath("../player")
 position = Vector2(573, 163)
 speed = 180.0
 chase_speed = 700.0
+
 [node name="CameraEffect" parent="." instance=ExtResource("9_pnqar")]
+
+[node name="Control" parent="." instance=ExtResource("8_eik88")]
