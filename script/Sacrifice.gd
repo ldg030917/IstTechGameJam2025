@@ -5,6 +5,7 @@ class_name Sacrifice
 @onready var idle_action_timer = $IdleActionTimer
 @onready var animation_sprite = $AnimatedSprite2D
 @onready var chasing_sprite = $ChasingSprite
+@onready var rage_effect = $RageEffect
 var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 
 @export var speed: float = 100
@@ -38,6 +39,8 @@ func _ready() -> void:
 	_on_idle_action_timer_timeout()
 	if type == Type.FRIENDLY and !is_fanatic:
 		$AttackArea/CollisionShape2D.disabled = true
+	Global.rage_mode_activated.connect(_on_rage_mode_activated)
+	Global.rage_mode_deactivated.connect(_on_rage_mode_deactivated)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("devote") and player != null and !is_heartpop:
@@ -219,9 +222,20 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 			Global.make_sound(atk_sound[get_child(0).name], global_position, 0.0)
 			
 		elif state != State.ATTACK:
-			
+			 
 			if facing_left:
 				animation_sprite.play("attack_L")
 			else:
 				animation_sprite.play("attack_R")
 		state = State.ATTACK
+
+func _on_rage_mode_activated():
+	print("gotit")
+	rage_effect.visible = true
+	speed *= 1.5
+	chase_speed *= 1.5
+
+func _on_rage_mode_deactivated():
+	rage_effect.visible = false
+	speed *= 0.66
+	chase_speed *= 0.66

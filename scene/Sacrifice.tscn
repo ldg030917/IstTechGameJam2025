@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqg6c0voa3kdc"]
+[gd_scene load_steps=11 format=3 uid="uid://cqg6c0voa3kdc"]
 
 [ext_resource type="Script" uid="uid://bgvfq1tbthdts" path="res://script/Sacrifice.gd" id="1_50n5x"]
+[ext_resource type="PackedScene" uid="uid://cnet17rd8klqg" path="res://scene/rage.tscn" id="3_nbxyh"]
 [ext_resource type="SpriteFrames" uid="uid://bngg8t4yoroou" path="res://scene/basic_sprite_frames.tres" id="12_12xoo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jum4h"]
@@ -109,6 +110,9 @@ disabled = true
 shape = SubResource("RectangleShape2D_51u1b")
 
 [node name="walking_sound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="RageEffect" parent="." instance=ExtResource("3_nbxyh")]
+visible = false
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnet17rd8klqg"]
 
-[ext_resource type="Shader" path="res://scene/rage.gdshader" id="1_joahg"]
+[ext_resource type="Shader" uid="uid://c1cp5jf50twvs" path="res://scene/rage.gdshader" id="1_joahg"]
 [ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="2_0g0tu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0g0tu"]
@@ -14,7 +14,7 @@ shader_parameter/num_points = 10
 shader_parameter/rotation_speed = 2.0
 shader_parameter/rotation_offset_degrees = 45.0
 
-[node name="Node2D" type="Node2D"]
+[node name="RageEffect" type="Node2D"]
 
 [node name="Rage" type="Sprite2D" parent="."]
 z_index = -1
