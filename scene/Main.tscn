@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckjnnxfqliahl"]
+[gd_scene load_steps=15 format=3 uid="uid://ckjnnxfqliahl"]
 
 [ext_resource type="PackedScene" uid="uid://ddm5vpelbqalt" path="res://scene/background.tscn" id="1_3sxgj"]
 [ext_resource type="Script" uid="uid://d2fxmbsptt10b" path="res://scene/Main.gd" id="1_aex65"]
@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://scene/Sheep.tscn" id="6_03owx"]
 [ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://scene/Fanatic.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://scene/Heretic.tscn" id="8_20pc6"]
-[ext_resource type="PackedScene" uid="uid://bn10f2lfhpq5i" path="res://scene/HUD.tscn" id="8_eik88"]
+[ext_resource type="PackedScene" uid="uid://dbi4ickyxfb4y" path="res://scene/HUD.tscn" id="8_eik88"]
 [ext_resource type="PackedScene" uid="uid://c610q3ejgkn6l" path="res://scene/CameraEffect.tscn" id="9_pnqar"]
 [ext_resource type="PackedScene" uid="uid://ciabeohkho45" path="res://scene/Timer.tscn" id="11_x4yfu"]
+[ext_resource type="PackedScene" uid="uid://d2tgoonubhv6u" path="res://scene/alter_indicator.tscn" id="12_hrl0l"]
 [ext_resource type="PackedScene" uid="uid://mlmtmy7ahit1" path="res://scene/GameOverScreen.tscn" id="13_hrl0l"]
 
 [node name="Main" type="Node2D"]
@@ -40,15 +41,18 @@ max_mob_count = 30
 spawn_attempts_per_tick = 15
 player = NodePath("../player")
 
-[node name="Sacrifice" parent="." instance=ExtResource("5_trn2v")]
-position = Vector2(573, 163)
-speed = 180.0
-chase_speed = 700.0
-
 [node name="CameraEffect" parent="." instance=ExtResource("9_pnqar")]
+min_radius = 0.1
+max_radius = 1.0
+change_step = 0.1
 
 [node name="Control" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_eik88")]
 player = NodePath("../player")
+
+[node name="AlterIndicator" parent="Control" node_paths=PackedStringArray("altar", "player") instance=ExtResource("12_hrl0l")]
+z_index = 10
+altar = NodePath("../../Altar")
+player = NodePath("../../player")
 
 [node name="Timer" parent="." instance=ExtResource("11_x4yfu")]
 
