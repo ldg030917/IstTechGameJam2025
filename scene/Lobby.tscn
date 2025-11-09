@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://b22oe3jj21ujx"]
+
+[ext_resource type="Script" uid="uid://bxumvxepboo5t" path="res://script/Lobby.gd" id="1_qng6a"]
+[ext_resource type="Texture2D" uid="uid://doexboini8jt1" path="res://asset/lobby.png" id="2_tinju"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gv8if"]
+font_size = 150
+font_color = Color(0.303233, 0.303233, 0.303233, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Lobby" type="Node2D"]
+script = ExtResource("1_qng6a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tinju")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "oblation"
+label_settings = SubResource("LabelSettings_gv8if")
+
+[node name="Control" type="Control" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "START"
+
+[node name="Control" type="Control" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "QUIT"
+
+[connection signal="pressed" from="CanvasLayer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
