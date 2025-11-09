@@ -142,7 +142,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_L",
-"speed": 25.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -165,7 +165,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_R",
-"speed": 25.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
