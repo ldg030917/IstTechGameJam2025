@@ -6,6 +6,8 @@ const inventory_size:int = 3
 
 var speed_0:float
 
+@export var slow_percent : float = 0.8
+
 var hp: float
 var speed:float
 var atk:float
@@ -40,6 +42,9 @@ signal died
 @onready var attack_sound = load("res://asset/audio/swing.mp3")
 @onready var penetrate_sound = load("res://asset/audio/penetrated.mp3")
 @onready var heart_poping_sound = load("res://asset/audio/heart_pop.mp3")
+@onready var blood_burst = load("res://scene/BloodDrop_Burst.tscn")
+@onready var blood_spray = load("res://scene/BloodDrop_Spray.tscn")
+var spray : Node2D
 
 func reset(_hp = null, _speed = null, _atk = null, _pos_0 = null):
 	speed_0 = _speed
@@ -63,13 +68,23 @@ func hurt(delta_hp:float, subject_pos:Vector2):
 	if state == STATE.hurt : return
 	state = STATE.hurt
 	hp -= delta_hp
+	check_spray()
 	var dr_hat = (position - subject_pos).normalized()
 	ref_pos = position + 100 * dr_hat
 	if dr_hat.dot(Vector2.RIGHT) > 0 : orientation = "left"
 	elif dr_hat.dot(Vector2.RIGHT) < 0: orientation = "right"
 	if hp <= 0:
 		died.emit()
+	var blood_burst = blood_burst.instantiate()
+	add_child(blood_burst)
 	
+func check_spray():
+	if hp <= max_hp / 1.1 and not spray:
+		spray = blood_spray.instantiate()
+		add_child(spray)
+	if hp > max_hp / 1.1 and spray:
+		spray.stop()
+
 func attack():
 	state = STATE.attacking
 	speed = 0
@@ -88,10 +103,10 @@ func attack():
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
 
 func _set_ref_pos(dt:float):
-	if Input.is_action_pressed("up"): ref_pos += dt*speed*Vector2.UP
-	if Input.is_action_pressed("down"): ref_pos += dt*speed*Vector2.DOWN
-	if Input.is_action_pressed("left"): ref_pos += dt*speed*Vector2.LEFT
-	if Input.is_action_pressed("right"): ref_pos += dt*speed*Vector2.RIGHT
+	if Input.is_action_pressed("up"): ref_pos += dt*speed*Vector2.UP*slow_percent
+	if Input.is_action_pressed("down"): ref_pos += dt*speed*Vector2.DOWN*slow_percent
+	if Input.is_action_pressed("left"): ref_pos += dt*speed*Vector2.LEFT*slow_percent
+	if Input.is_action_pressed("right"): ref_pos += dt*speed*Vector2.RIGHT*slow_percent
 
 func _goto_ref_pos(dt:float):
 	const k = 5.0
