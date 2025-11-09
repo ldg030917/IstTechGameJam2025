@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c610q3ejgkn6l"]
 
-[ext_resource type="Shader" uid="uid://dbuclvw34811n" path="res://CameraEffect.gdshader" id="1_mj3on"]
-[ext_resource type="Script" uid="uid://co7reck7w8gco" path="res://SightEffect.gd" id="2_ws5md"]
+[ext_resource type="Shader" path="res://CameraEffect.gdshader" id="1_mj3on"]
+[ext_resource type="Script" uid="uid://bikrj3blkae4c" path="res://script/SightEffect.gd" id="2_ws5md"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywame"]
 shader = ExtResource("1_mj3on")

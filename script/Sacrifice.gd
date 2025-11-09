@@ -13,6 +13,7 @@ var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 @export var dgg: float = 10 # Delta god gauge
 @export var attack: float = 1.2
 @export var type: Type = Type.HOSTILE
+@export var is_fanatic: bool = false
 
 var state: State = State.IDLE
 var target: Node2D
@@ -31,7 +32,7 @@ enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
 func _ready() -> void:
 	state = State.IDLE
 	_on_idle_action_timer_timeout()
-	if type == Type.FRIENDLY:
+	if type == Type.FRIENDLY and !is_fanatic:
 		$AttackArea/CollisionShape2D.disabled = true
 
 func _input(event: InputEvent) -> void:
@@ -98,6 +99,8 @@ func chase_state_logic(delta):
 
 func attack_state_logic(delta):
 	velocity = Vector2.ZERO
+	if is_fanatic:
+		return
 	if facing_left:
 		animation_sprite.play("attack_L")
 	else:
@@ -112,7 +115,7 @@ func hurt_state_logic():
 		animation_sprite.play("hurt_R")
 
 func _on_sight_area_body_entered(body: Node2D) -> void:
-	if type == Type.FRIENDLY:
+	if type == Type.FRIENDLY and !is_fanatic:
 		return
 	if body is Player:
 		print("CHASE")
@@ -131,8 +134,11 @@ func _on_chase_area_body_exited(body: Node2D) -> void:
 func hurt(damage: int, subject_pos: Vector2) -> bool:
 	if state == State.DEAD:
 		return false
+	
+	
+	if !is_fanatic:
+		state = State.HURT
 		
-	state = State.HURT
 	hp -= damage
 	var dr_hat = (position - subject_pos).normalized()
 	velocity += dr_hat * 100
@@ -176,6 +182,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			if type == Type.FRIENDLY:
 				state = State.IDLE
 		State.ATTACK:
+			if is_fanatic:
+				state = State.ATTACK
+				return
 			state = State.CHASE
 			if type == Type.FRIENDLY:
 				state = State.IDLE
@@ -198,5 +207,12 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		return
 	#if state == State.CHASE:
 	if body is Player:
-		body.hurt(attack, position)
+		if !is_fanatic:
+			body.hurt(attack, position)
+		elif state != State.ATTACK:
+			
+			if facing_left:
+				animation_sprite.play("attack_L")
+			else:
+				animation_sprite.play("attack_R")
 		state = State.ATTACK

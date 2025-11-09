@@ -1,11 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsgur8u5aiq6d"]
+[gd_scene load_steps=4 format=3 uid="uid://dsgur8u5aiq6d"]
 
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://scene/Sacrifice.tscn" id="1_6uy80"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tu6ua"]
+radius = 444.991
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tu6ua"]
+size = Vector2(500, 300)
+
 [node name="Sacrifice" instance=ExtResource("1_6uy80")]
+attack = 0.0
+type = 2
+is_fanatic = true
+
+[node name="CollisionShape2D" parent="SightArea" index="0"]
+shape = SubResource("CircleShape2D_tu6ua")
 
 [node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
 
-[node name="AnimatedSprite2D" parent="." index="5"]
-animation = &"move_R"
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+shape = SubResource("RectangleShape2D_tu6ua")

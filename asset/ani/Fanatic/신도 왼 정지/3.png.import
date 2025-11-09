@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ceivwiltmtn73"
-path="res://.godot/imported/3.png-7290fa491d6cb1d4fe8befd58575fd1b.ctex"
+path="res://.godot/imported/3.png-d2da7ff58c9fa09ed5b3181c8e2b5e0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ani/Fanatic/신도 왼 정지/3.png"
-dest_files=["res://.godot/imported/3.png-7290fa491d6cb1d4fe8befd58575fd1b.ctex"]
+source_file="res://asset/ani/fanatic/신도 왼 정지/3.png"
+dest_files=["res://.godot/imported/3.png-d2da7ff58c9fa09ed5b3181c8e2b5e0f.ctex"]
 
 [params]
 
