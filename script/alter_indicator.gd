@@ -3,8 +3,8 @@ extends Sprite2D
 @export var altar: Altar
 @export var player: Player
 
-@export var min_visible_distance: float = 500.0
-@export var display_radius: float = 200.0
+@export var min_visible_distance: float = 1000.0
+@export var display_radius: float = 400.0
 @export var arrow_rotation_offset_degrees: float = 90.0
 
 var screen_center: Vector2
