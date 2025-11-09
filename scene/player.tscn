@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://c6sc66ex35uf7"]
+[gd_scene load_steps=78 format=3 uid="uid://c6sc66ex35uf7"]
 
 [ext_resource type="Script" uid="uid://0e361ph7pucw" path="res://script/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dg6hfuk8140vk" path="res://asset/circle-512.png" id="2_76oay"]
@@ -72,7 +72,8 @@
 [ext_resource type="Texture2D" uid="uid://w8dqja4ts7tn" path="res://asset/ani/move_R/7.png" id="50_d1347"]
 [ext_resource type="Texture2D" uid="uid://c0dcl4627knod" path="res://asset/ani/move_R/8.png" id="51_h4gvw"]
 [ext_resource type="AudioStream" uid="uid://cqnw2uu1tqlkc" path="res://asset/audio/walking1.mp3" id="57_c8aaj"]
-[ext_resource type="Script" path="res://script/progress_bar.gd" id="73_3mmt4"]
+[ext_resource type="Script" uid="uid://bx4omsoq5rbcv" path="res://script/progress_bar.gd" id="73_3mmt4"]
+[ext_resource type="AudioStream" uid="uid://c7sdgvkaoqkuv" path="res://asset/audio/ost1.mp3" id="74_8pv5j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1xqrm"]
 animations = [{
@@ -440,6 +441,11 @@ grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false
 script = ExtResource("73_3mmt4")
+
+[node name="bgm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("74_8pv5j")
+volume_db = 1.0
+autoplay = true
 
 [connection signal="hp_changed" from="." to="ProgressBar" method="set_fill_mode"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
