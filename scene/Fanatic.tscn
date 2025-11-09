@@ -3,9 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://cqg6c0voa3kdc" path="res://scene/Sacrifice.tscn" id="1_6uy80"]
 
 [node name="Sacrifice" instance=ExtResource("1_6uy80")]
+attack = 0.0
+type = 2
 
 [node name="ChasingSprite" parent="." index="4"]
 frame_progress = 0.882243
 
 [node name="AnimatedSprite2D" parent="." index="5"]
-animation = &"move_R"
+animation = &"attack_L"
