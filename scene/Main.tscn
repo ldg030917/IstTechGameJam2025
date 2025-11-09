@@ -38,13 +38,16 @@ player = NodePath("../player")
 [node name="MobSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_cm0pq")]
 mob_scenes = Array[PackedScene]([ExtResource("5_trn2v"), ExtResource("6_03owx"), ExtResource("7_wkp8b"), ExtResource("8_20pc6")])
 max_mob_count = 30
+min_spawn_radius = 1000.0
+max_spawn_radius = 1500.0
 spawn_attempts_per_tick = 15
 player = NodePath("../player")
 
-[node name="CameraEffect" parent="." instance=ExtResource("9_pnqar")]
+[node name="CameraEffect" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_pnqar")]
 min_radius = 0.1
 max_radius = 1.0
 change_step = 0.1
+player = NodePath("../player")
 
 [node name="Control" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_eik88")]
 player = NodePath("../player")
