@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmpaj00l28hep"]
+
+[ext_resource type="Shader" uid="uid://bp6p421uofy5g" path="res://scene/rage.gdshader" id="1_joahg"]
+[ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="2_0g0tu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g0tu"]
+shader = ExtResource("1_joahg")
+shader_parameter/effect_color = Color(1, 0, 0, 1)
+shader_parameter/effect_radius = 0.05
+shader_parameter/effect_smoothness = 0.4
+shader_parameter/sun_main_radius = 0.6
+shader_parameter/inner_radius_factor = 0.8
+shader_parameter/num_points = 10
+shader_parameter/rotation_speed = 2.0
+shader_parameter/rotation_offset_degrees = 45.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Rage" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_0g0tu")
+scale = Vector2(3, 3)
+texture = ExtResource("2_0g0tu")
