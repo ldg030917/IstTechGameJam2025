@@ -10,7 +10,7 @@ var blooddrop_burst = load("res://scene/BloodDrop_Burst.tscn")
 @export var speed: float = 100
 @export var chase_speed: float = 100
 @export var hp: float = 10
-@export var dgg: float = 0.1 # Delta god gauge
+@export var dgg: float = 10 # Delta god gauge
 @export var attack: float = 1.2
 @export var type: Type = Type.HOSTILE
 

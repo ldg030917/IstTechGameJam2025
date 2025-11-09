@@ -86,7 +86,7 @@ func attack():
 	state = STATE.attacking
 	speed = 0
 	
-	make_sound(attack_sound, -0.5, 0.31)
+	Global.make_sound(attack_sound,global_position, -0.5, 0.31)
 	
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	#print(overlapping_bodies)
@@ -94,7 +94,7 @@ func attack():
 	for body in overlapping_bodies:
 		if body is Sacrifice:
 			if body.hurt(atk, position):
-				make_sound(penetrate_sound, 3.0)
+				Global.make_sound(penetrate_sound,global_position, 3.0)
 		# 3. 이 바디가 "적"(enemy)인지 확인합니다. (그룹 사용을 추천)
 		#(적 씬에서 "enemy" 그룹에 추가해두어야 함)      
 		# 4. 적에게 "take_damage" 함수가 있다면 호출하여 대미지를 줍니다.
@@ -127,6 +127,7 @@ func get_heart(dgg):
 	last_dgg = dgg
 	state = STATE.poping
 	speed = 0
+	Global.make_sound(heart_poping_sound, global_position, 0.0)
 
 func _physics_process(dt: float) -> void:
 	#print(Global.god_gauge)
@@ -180,14 +181,6 @@ func _physics_process(dt: float) -> void:
 func _convert_orientation_to_num(_orientation):
 	if _orientation == "left" : return -1
 	elif _orientation == "right" : return 1
-	
-func make_sound(_sound, _db, _offset = null):
-	var s = Sound.new()
-	s.stream = _sound
-	s.volume_db = _db
-	$sounds.add_child(s)
-	var offset = 0 if _offset == null else _offset
-	s.play(offset)
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack_left" or animated_sprite.animation == "attack_right":

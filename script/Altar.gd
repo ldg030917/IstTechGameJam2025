@@ -11,6 +11,8 @@ class_name Altar
 @export var player: Player
 var can_devote := false
 
+@onready var devoting_sound = load("res://asset/audio/devoting.mp3")
+
 func _ready() -> void:
 	if is_instance_valid(player):
 		player.devoted.connect(_on_player_devoted)
@@ -23,12 +25,17 @@ func _on_player_devoted(inventory: Array):
 	for i in range(inventory.size()):
 		hearts_array[i].show()
 	await get_tree().create_timer(3.0).timeout
+	Global.make_sound(devoting_sound,global_position, 0.0)
+	modulate = 100 * Color.WHITE
 	for i in range(inventory.size()):
 		Global.god_gauge += inventory[i]
+		Global.god_gauge = clamp(Global.god_gauge, 0, Global.max_gg)
 		hearts_array[i].hide()
 		
 func _physics_process(delta: float) -> void:
 	z_index = global_position.y - 20
+	
+	modulate += 20.0 * (Color.WHITE - modulate)*delta
 	
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
