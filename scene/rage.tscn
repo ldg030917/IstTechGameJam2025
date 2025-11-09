@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmpaj00l28hep"]
+[gd_scene load_steps=4 format=3 uid="uid://cnet17rd8klqg"]
 
-[ext_resource type="Shader" uid="uid://bp6p421uofy5g" path="res://scene/rage.gdshader" id="1_joahg"]
+[ext_resource type="Shader" path="res://scene/rage.gdshader" id="1_joahg"]
 [ext_resource type="Texture2D" uid="uid://b7vh4d8j7g8yf" path="res://asset/icon.svg" id="2_0g0tu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0g0tu"]
