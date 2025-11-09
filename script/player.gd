@@ -26,6 +26,8 @@ enum STATE {
 var state
 
 signal hp_changed(current_hp)
+signal got_heart(i: int)
+
 var max_hp:float = 10.0
 @onready var hp_bar: ProgressBar = $ProgressBar
 
@@ -116,6 +118,7 @@ func get_heart(dgg):
 	state = STATE.poping
 	speed = 0
 	Global.make_sound(heart_poping_sound, global_position, 0.0)
+	got_heart.emit(inventory.size())
 
 	
 
@@ -182,6 +185,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "devoting":
 		#print(inventory)
 		devoted.emit(inventory)
+		got_heart.emit(-1)
 		inventory = []
 		#print(inventory)
 		

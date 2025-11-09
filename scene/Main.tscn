@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://scene/Sheep.tscn" id="6_03owx"]
 [ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://scene/Fanatic.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://scene/Heretic.tscn" id="8_20pc6"]
-[ext_resource type="PackedScene" path="res://scene/HUD.tscn" id="8_eik88"]
+[ext_resource type="PackedScene" uid="uid://bn10f2lfhpq5i" path="res://scene/HUD.tscn" id="8_eik88"]
 [ext_resource type="PackedScene" uid="uid://c610q3ejgkn6l" path="res://scene/CameraEffect.tscn" id="9_pnqar"]
 [ext_resource type="PackedScene" uid="uid://ciabeohkho45" path="res://scene/Timer.tscn" id="11_x4yfu"]
 [ext_resource type="PackedScene" uid="uid://mlmtmy7ahit1" path="res://scene/GameOverScreen.tscn" id="13_hrl0l"]
@@ -47,7 +47,8 @@ chase_speed = 700.0
 
 [node name="CameraEffect" parent="." instance=ExtResource("9_pnqar")]
 
-[node name="Control" parent="." instance=ExtResource("8_eik88")]
+[node name="Control" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_eik88")]
+player = NodePath("../player")
 
 [node name="Timer" parent="." instance=ExtResource("11_x4yfu")]
 
