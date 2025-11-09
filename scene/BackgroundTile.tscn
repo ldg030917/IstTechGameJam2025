@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://db3v84nxc5d42"]
+
+[ext_resource type="Texture2D" uid="uid://dq7foq5eegrjg" path="res://asset/background.png" id="1_5lsus"]
+
+[node name="Tile" type="Sprite2D"]
+z_index = -4096
+scale = Vector2(2, 2)
+texture = ExtResource("1_5lsus")
