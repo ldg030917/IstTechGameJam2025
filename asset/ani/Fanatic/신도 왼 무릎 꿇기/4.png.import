@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhajlxemdcapa"
-path="res://.godot/imported/4.png-39c87f01dc55fc23cfa3d01c43c35a99.ctex"
+path="res://.godot/imported/4.png-9a28858c2dbeab18a4ddfe431de72f6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ani/fanatic/신도 왼 무릎 꿇기/4.png"
-dest_files=["res://.godot/imported/4.png-39c87f01dc55fc23cfa3d01c43c35a99.ctex"]
+source_file="res://asset/ani/Fanatic/신도 왼 무릎 꿇기/4.png"
+dest_files=["res://.godot/imported/4.png-9a28858c2dbeab18a4ddfe431de72f6b.ctex"]
 
 [params]
 

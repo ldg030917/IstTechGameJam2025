@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://enothfr38psq"
-path="res://.godot/imported/오 구멍O.png-afe1b4ebd0a434cbfbd25de5bc46cd32.ctex"
+path="res://.godot/imported/오 구멍O.png-dd49918a2aba8f2960c0e1fc02595de9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ani/fanatic/신도 시체/오 구멍O.png"
-dest_files=["res://.godot/imported/오 구멍O.png-afe1b4ebd0a434cbfbd25de5bc46cd32.ctex"]
+source_file="res://asset/ani/Fanatic/신도 시체/오 구멍O.png"
+dest_files=["res://.godot/imported/오 구멍O.png-dd49918a2aba8f2960c0e1fc02595de9.ctex"]
 
 [params]
 
