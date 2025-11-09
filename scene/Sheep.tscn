@@ -4,6 +4,9 @@
 [ext_resource type="SpriteFrames" uid="uid://cn55emanfpng4" path="res://scene/sheep_sprite_frames.tres" id="2_02yij"]
 
 [node name="Sacrifice" instance=ExtResource("1_qsh3u")]
+speed = 200.0
+hp = 5.0
+attack = 0.0
 type = 2
 
 [node name="ChasingSprite" parent="." index="4"]
@@ -11,4 +14,4 @@ frame_progress = 0.882243
 
 [node name="AnimatedSprite2D" parent="." index="5"]
 sprite_frames = ExtResource("2_02yij")
-animation = &"move_R"
+animation = &"hurt_R"

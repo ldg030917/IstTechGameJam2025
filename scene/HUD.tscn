@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbi4ickyxfb4y"]
+
+[ext_resource type="Script" uid="uid://ypfsdyxvv286" path="res://script/hud.gd" id="1_mmka4"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_mmka4")
+
+[node name="GGbar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 33.0
+offset_right = 500.0
+offset_bottom = 60.0
+grow_horizontal = 2
+show_percentage = false
