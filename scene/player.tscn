@@ -72,7 +72,7 @@
 [ext_resource type="Texture2D" uid="uid://w8dqja4ts7tn" path="res://asset/ani/move_R/7.png" id="50_d1347"]
 [ext_resource type="Texture2D" uid="uid://c0dcl4627knod" path="res://asset/ani/move_R/8.png" id="51_h4gvw"]
 [ext_resource type="AudioStream" uid="uid://cqnw2uu1tqlkc" path="res://asset/audio/walking1.mp3" id="57_c8aaj"]
-[ext_resource type="Script" uid="uid://bx4omsoq5rbcv" path="res://script/progress_bar.gd" id="73_3mmt4"]
+[ext_resource type="Script" path="res://script/progress_bar.gd" id="73_3mmt4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1xqrm"]
 animations = [{

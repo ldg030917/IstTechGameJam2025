@@ -10,12 +10,14 @@ size = Vector2(100, 160)
 speed = 200.0
 chase_speed = 200.0
 
-[node name="Hurtbox" parent="." index="0"]
+[node name="heretic" type="Node2D" parent="." index="0"]
+
+[node name="Hurtbox" parent="." index="1"]
 position = Vector2(-10, 31)
 shape = SubResource("RectangleShape2D_h385e")
 
-[node name="ChasingSprite" parent="." index="4"]
+[node name="ChasingSprite" parent="." index="5"]
 frame_progress = 0.882243
 
-[node name="AnimatedSprite2D" parent="." index="5"]
+[node name="AnimatedSprite2D" parent="." index="6"]
 sprite_frames = ExtResource("2_h385e")

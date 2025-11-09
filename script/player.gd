@@ -32,6 +32,7 @@ var max_hp:float = 10.0
 var last_dgg:float = 0
 
 signal devoted(inventory: Array[float])
+signal died
 
 @onready var attack_area = $Node2D/AttackArea
 @onready var animated_sprite = $AnimatedSprite2D
@@ -66,7 +67,8 @@ func hurt(delta_hp:float, subject_pos:Vector2):
 	ref_pos = position + 100 * dr_hat
 	if dr_hat.dot(Vector2.RIGHT) > 0 : orientation = "left"
 	elif dr_hat.dot(Vector2.RIGHT) < 0: orientation = "right"
-	
+	if hp <= 0:
+		died.emit()
 	
 func attack():
 	state = STATE.attacking
