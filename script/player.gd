@@ -79,10 +79,10 @@ func hurt(delta_hp:float, subject_pos:Vector2):
 	add_child(blood_burst)
 	
 func check_spray():
-	if hp <= max_hp / 1.1 and not spray:
+	if hp <= max_hp / 2 and not spray:
 		spray = blood_spray.instantiate()
 		add_child(spray)
-	if hp > max_hp / 1.1 and spray:
+	if hp > max_hp / 2 and spray:
 		spray.stop()
 
 func attack():

@@ -7,6 +7,7 @@ class_name Altar
 	$Heart2,
 	$Heart3
 ]
+@onready var rage_effect = $RageEffect
 
 @export var player: Player
 var can_devote := false
@@ -22,17 +23,37 @@ func _input(event: InputEvent) -> void:
 		player.devote()
 			
 func _on_player_devoted(inventory: Array):
+	var fade_in_duration = 1.5
+	var sprite = $RageEffect/Rage
+	
+	sprite.scale = Vector2.ZERO
+	rage_effect.show()
+	
+	var tween_in = create_tween()
+	tween_in.tween_property(sprite, "scale", Vector2.ONE*3, fade_in_duration)
+
 	for i in range(inventory.size()):
 		hearts_array[i].show()
+		
 	await get_tree().create_timer(0.5).timeout
+	
 	Global.make_sound(devoting_sound,global_position, 0.0)
 	$"../player".hp += $"../player".max_hp*30
 	modulate = 1.4 * Color.WHITE
+	
 	for i in range(inventory.size()):
 		Global.god_gauge += inventory[i]
 		Global.god_gauge = clamp(Global.god_gauge, 0, Global.max_gg)
 		hearts_array[i].hide()
-		
+
+	await tween_in.finished
+	
+	var fade_out_duration = 1.5
+	
+	var tween_out = create_tween()
+	tween_out.tween_property(sprite, "scale", Vector2.ZERO, fade_out_duration)
+	
+	tween_out.tween_callback(rage_effect.hide)
 func _physics_process(delta: float) -> void:
 	z_index = global_position.y - 20
 	

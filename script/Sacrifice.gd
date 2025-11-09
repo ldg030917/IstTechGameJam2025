@@ -53,6 +53,8 @@ func _input(event: InputEvent) -> void:
 			animation_sprite.play("heartpop_L")
 		else:
 			animation_sprite.play("heartpop_R")
+		var burst = blooddrop_burst.instantiate()
+		add_child(burst)
 		var tween = create_tween()
 		tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 3)
 		await tween.finished
