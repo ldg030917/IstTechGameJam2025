@@ -6,8 +6,9 @@ var max_gg:float = 100
 
 const a := 1
 
-func _ready() -> void:
+func set_gauge():
 	god_gauge = max_gg
+
 
 func _process(delta: float) -> void:
 	god_gauge -= delta * a

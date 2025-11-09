@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ckjnnxfqliahl"]
 
-[ext_resource type="PackedScene" path="res://scene/background.tscn" id="1_3sxgj"]
+[ext_resource type="PackedScene" uid="uid://ddm5vpelbqalt" path="res://scene/background.tscn" id="1_3sxgj"]
 [ext_resource type="PackedScene" uid="uid://c6sc66ex35uf7" path="res://scene/player.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://b3v557u28b3as" path="res://scene/Altar.tscn" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://f75gbexwqgtt" path="res://scene/MobSpawner.tscn" id="4_cm0pq"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bner5cmiorp76" path="res://scene/Sheep.tscn" id="6_03owx"]
 [ext_resource type="PackedScene" uid="uid://dsgur8u5aiq6d" path="res://scene/Fanatic.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://c4vsy48i62d6f" path="res://scene/Heretic.tscn" id="8_20pc6"]
-[ext_resource type="PackedScene" uid="uid://dbi4ickyxfb4y" path="res://scene/HUD.tscn" id="8_eik88"]
+[ext_resource type="PackedScene" path="res://scene/HUD.tscn" id="8_eik88"]
 [ext_resource type="PackedScene" uid="uid://c610q3ejgkn6l" path="res://scene/CameraEffect.tscn" id="9_pnqar"]
 
 [node name="Main" type="Node2D"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2yeyri2d2b5e"
-path="res://.godot/imported/6.png-b94be33c0ca87c24cdd1977f3697adc8.ctex"
+path="res://.godot/imported/6.png-f24bd8b1c413af8696916673f81cfe0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ani/Fanatic/신도 왼 움직임/6.png"
-dest_files=["res://.godot/imported/6.png-b94be33c0ca87c24cdd1977f3697adc8.ctex"]
+source_file="res://asset/ani/fanatic/신도 왼 움직임/6.png"
+dest_files=["res://.godot/imported/6.png-f24bd8b1c413af8696916673f81cfe0a.ctex"]
 
 [params]
 

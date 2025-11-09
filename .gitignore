@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+scene/Heretic.tscn
+scene/Cow.tscn
+scene/Cow.tscn
+scene/Cow.tscn
