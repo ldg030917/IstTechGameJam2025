@@ -28,6 +28,10 @@ var is_heartpop := false
 
 enum Type { HOSTILE, NEUTRAL, FRIENDLY }
 enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
+var atk_sound = {
+	"heretic" : load("res://asset/audio/penetrated.mp3"),
+	"cow" : load("res://asset/audio/cow_atk.mp3")
+}
 
 func _ready() -> void:
 	state = State.IDLE
@@ -73,6 +77,7 @@ func _physics_process(delta: float) -> void:
 func idle_state_logic(delta):
 	if is_wandering:
 		var direction = (wander_target_position - global_position).normalized()
+		if !$walking_sound.playing:$walking_sound.play()
 		velocity = velocity.lerp(direction * speed, 1 * delta)
 		if facing_left:
 			animation_sprite.play("move_L")
@@ -82,6 +87,7 @@ func idle_state_logic(delta):
 			is_wandering = false
 			velocity = Vector2.ZERO
 	else:
+		$walking_sound.stop()
 		velocity = Vector2.ZERO
 		if facing_left:
 			animation_sprite.play("idle_L")
@@ -210,6 +216,8 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if !is_fanatic:
 			body.hurt(attack, position)
+			Global.make_sound(atk_sound[get_child(0).name], global_position, 0.0)
+			
 		elif state != State.ATTACK:
 			
 			if facing_left:

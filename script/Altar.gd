@@ -26,6 +26,7 @@ func _on_player_devoted(inventory: Array):
 		hearts_array[i].show()
 	await get_tree().create_timer(0.5).timeout
 	Global.make_sound(devoting_sound,global_position, 0.0)
+	$"../player".hp += $"../player".max_hp*30
 	modulate = 1.4 * Color.WHITE
 	for i in range(inventory.size()):
 		Global.god_gauge += inventory[i]
